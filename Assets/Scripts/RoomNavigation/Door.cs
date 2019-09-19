@@ -10,7 +10,6 @@ public class Door : MonoBehaviour, IInteractable {
 			return;
 		}
 
-		Debug.Log("Interacting with door", transform);
 		room.Enter();
 	}
 	
