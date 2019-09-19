@@ -121,6 +121,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 160739}
+  - component: {fileID: 160740}
   m_Layer: 0
   m_Name: EntranceHall
   m_TagString: Untagged
@@ -145,6 +146,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &160740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 160738}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0db391cabb380cb4a880e1b399fca637, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraStartPosition: {x: -8.5, y: -5}
 --- !u!1 &214972184
 GameObject:
   m_ObjectHideFlags: 0
@@ -207,7 +221,7 @@ Camera:
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 1
-  m_AllowMSAA: 1
+  m_AllowMSAA: 0
   m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
@@ -941,6 +955,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 861540682}
+  - component: {fileID: 861540683}
   m_Layer: 0
   m_Name: Outside
   m_TagString: Untagged
@@ -964,6 +979,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &861540683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 861540681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0db391cabb380cb4a880e1b399fca637, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraStartPosition: {x: -8.5, y: -5}
 --- !u!1 &896538214
 GameObject:
   m_ObjectHideFlags: 0
