@@ -6,7 +6,7 @@ public class CharacterMovement : MonoBehaviour {
 	[SerializeField] private SpriteRenderer visuals;
 
 	private void Update() {
-		float movementInput = GameInput.Instance.InputService.Horizontal();
+		float movementInput = GameInput.Instance.Service.Horizontal();
 		if(movementInput == 0) { return; }
 
 		visuals.flipX = movementInput < 0f;

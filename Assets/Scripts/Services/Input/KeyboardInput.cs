@@ -12,16 +12,16 @@ public class KeyboardInput : IInput {
 		}
 	}
 
-	public bool InventoryButtonUp() {
-		return Input.GetKeyUp(KeyCode.UpArrow);
+	public bool InventoryButtonDown() {
+		return Input.GetKeyDown(KeyCode.UpArrow);
 	}
 
-	public bool BackButtonUp() {
-		return Input.GetKeyUp(KeyCode.RightArrow);
+	public bool BackButtonDown() {
+		return Input.GetKeyDown(KeyCode.RightArrow);
 	}
 
-	public bool InteractButtonUp() {
-		return Input.GetKeyUp(KeyCode.RightArrow);
+	public bool InteractButtonDown() {
+		return Input.GetKeyDown(KeyCode.DownArrow);
 	}
 
 }

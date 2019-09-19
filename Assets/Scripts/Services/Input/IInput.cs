@@ -1,8 +1,8 @@
 ﻿public interface IInput {
 
 	float Horizontal();
-	bool InventoryButtonUp();
-	bool BackButtonUp();
-	bool InteractButtonUp();
+	bool InventoryButtonDown();
+	bool BackButtonDown();
+	bool InteractButtonDown();
 	
 }

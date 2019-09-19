@@ -13,11 +13,11 @@ public class GameInput : MonoBehaviour {
 		}
 	}
 
-	public IInput InputService { get; private set; }
+	public IInput Service { get; private set; }
 
 	private void Awake() {
-		if(InputService != null) { return; }
-		InputService = new KeyboardInput();
+		if(Service != null) { return; }
+		Service = new KeyboardInput();
 	}
 
 }
