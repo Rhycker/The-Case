@@ -5,16 +5,16 @@ using UnityEngine;
 public class RoomEditor : Editor {
 
 	private void OnSceneGUI() {
-		Camera mainCamera = Camera.main;
-		float height = Camera.main.orthographicSize * 2;
-		float width = Camera.main.aspect * height;
-		Vector3 cameraViewSize = new Vector3(width, height, 0f);
-
 		SerializedProperty positionProperty = serializedObject.FindProperty("cameraStartPosition");
-		float cameraXOffset = positionProperty.vector2Value.x + width * 0.5f;
-		float cameraYOffset = positionProperty.vector2Value.y + height * 0.5f;
 		Vector3 localPosition = ((Room)target).transform.position;
-		Vector3 cameraViewStart = new Vector3(localPosition.x + cameraXOffset, localPosition.y + cameraYOffset);
+		float cameraXOffset = localPosition.x + positionProperty.vector2Value.x;
+		float cameraYOffset = localPosition.y + positionProperty.vector2Value.y;
+		Vector3 cameraViewStart = new Vector3(cameraXOffset, cameraYOffset);
+
+		Camera mainCamera = Camera.main;
+		float cameraHeight = Camera.main.orthographicSize * 2;
+		float cameraWidth = Camera.main.aspect * cameraHeight;
+		Vector3 cameraViewSize = new Vector3(cameraWidth, cameraHeight, 0f);
 
 		Handles.color = Color.blue;
 		Handles.DrawWireCube(cameraViewStart, cameraViewSize);
