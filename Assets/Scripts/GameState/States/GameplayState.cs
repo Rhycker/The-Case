@@ -6,7 +6,6 @@ public class GameplayState : State {
 	[SerializeField] private Room startRoom;
 
 	public override void Enter() {
-		startRoom.Enter();
 	}
 
 	public override void Exit() {

@@ -5,6 +5,7 @@ using UnityEngine;
 public class RoomEditor : Editor {
 
 	private void OnSceneGUI() {
+		/*
 		SerializedProperty positionProperty = serializedObject.FindProperty("cameraStartPosition");
 		Vector3 localPosition = ((Room)target).transform.position;
 		float cameraXOffset = localPosition.x + positionProperty.vector2Value.x;
@@ -18,6 +19,7 @@ public class RoomEditor : Editor {
 
 		Handles.color = Color.blue;
 		Handles.DrawWireCube(cameraViewStart, cameraViewSize);
+		*/
 	}
 
 }
