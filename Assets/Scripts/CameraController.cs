@@ -9,7 +9,6 @@ public class CameraController : MonoBehaviour {
     }
 
 	private void OnRoomEntered(Room nextRoom) {
-		Debug.Log("CC Enter room: " + nextRoom.name);
 		Vector3 targetPosition = new Vector3(nextRoom.OriginPosition.x, nextRoom.OriginPosition.y + floorYOffset, transform.position.z);
 		transform.position = targetPosition;
 	}

@@ -2,9 +2,11 @@
 
 public class CharacterMovement : MonoBehaviour {
 
-	[SerializeField] private float movementSpeed;
-	[SerializeField] private SpriteRenderer visuals;
-	[SerializeField] private float floorYOffset;
+	[SerializeField] private float movementSpeed = default;
+	[SerializeField] private SpriteRenderer visuals = default;
+	[SerializeField] private float floorYOffset = default;
+	[SerializeField] private LayerMask obstacleLayerMask = default;	
+	[SerializeField] private Vector2 colliderCheckBoxSize = default;
 
 	private void Awake() {
 		RoomNavigation.Instance.OnRoomEntered += OnRoomEntered;
@@ -22,7 +24,11 @@ public class CharacterMovement : MonoBehaviour {
 		visuals.flipX = movementInput < 0f;
 		Vector2 movement = new Vector2();
 		movement.x = movementInput * movementSpeed * Time.deltaTime;
-		transform.Translate(movement);
+		Vector2 newPosition = (Vector2)transform.position + movement;
+		bool willHitCollider = Physics2D.OverlapBox(newPosition, colliderCheckBoxSize, 0f, obstacleLayerMask);
+		if (!willHitCollider) {
+			transform.position = newPosition;
+		}
 	}
 
 #if UNITY_EDITOR
