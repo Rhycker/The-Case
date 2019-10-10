@@ -13,51 +13,28 @@ public class DialogueUI : MonoBehaviour {
 	public static DialogueUI Instance { get; private set; }
 
 	[SerializeField] private GameObject dialogueContainer;
-	[SerializeField] private Color textColorDefault;
-	[SerializeField] private Color textColorHighlight;
 	[Space]
 	[SerializeField] private GameObject playerContainer;
-	[SerializeField] private TMP_Text playerChoiceTemplate; 
+	[SerializeField] private DialogueChoiceWidget playerChoiceWidgetTemplate;
 	[SerializeField] private Image playerImage;
 	[SerializeField] private TMP_Text playerLabelText;
+	[SerializeField] private TMP_Text playerChosenText;
 	[Space]
 	[SerializeField] private GameObject npcContainer;
 	[SerializeField] private Image npcImage;
 	[SerializeField] private TMP_Text npcText;
 	[SerializeField] private TMP_Text npcLabelText;
 
-	private List<TMP_Text> currentChoices;
+	private List<DialogueChoiceWidget> currentChoiceWidgets;
 	private string playerDisplayName;
 
 	public void SetPlayerName(string displayName) {
 		playerDisplayName = displayName;
 	}
 
-	public void Interact(VIDE_Assign dialogue) {
-		if (VD.isActive) {
-			VD.Next();
-		}
-		else {
-			StartDialogue(dialogue);
-		}
-	}
+	public void StartDialogue(VIDE_Assign dialogue) {
+		if (VD.isActive) { return; }
 
-	private void Awake() {
-		Instance = this;
-
-		//VD.LoadDialogues();
-		VD.LoadState(SAVE_GAME_NAME, true);
-
-		currentChoices = new List<TMP_Text>();
-		dialogueContainer.SetActive(false);
-		playerChoiceTemplate.gameObject.SetActive(false);
-	}
-
-	private void Update() {
-		UpdateCommentChoice();
-	}
-
-	private void StartDialogue(VIDE_Assign dialogue) {
 		playerLabelText.text = "";
 		npcText.text = "";
 		npcLabelText.text = "";
@@ -69,15 +46,48 @@ public class DialogueUI : MonoBehaviour {
 		dialogueContainer.SetActive(true);
 	}
 
-	private void UpdateCommentChoice() {
+	private void Awake() {
+		Instance = this;
+
+		//VD.LoadDialogues();
+		VD.LoadState(SAVE_GAME_NAME, true);
+
+		currentChoiceWidgets = new List<DialogueChoiceWidget>();
+		dialogueContainer.SetActive(false);
+		playerChoiceWidgetTemplate.gameObject.SetActive(false);
+		playerChosenText.enabled = false;
+	}
+
+	private void Update() {
 		if (!VD.isActive) { return; }
 		VD.NodeData nodeData = VD.nodeData;
-		if (!nodeData.isPlayer) { return; }
 		if (nodeData.pausedAction) { return; }
 
+		bool playerChoiceIsShowing = nodeData.isPlayer && !playerChosenText.enabled;
+		if (playerChoiceIsShowing) {
+			UpdateCommentChoice(nodeData);
+		}
+
+		if (GameInput.Instance.Service.InteractButtonDown()) {
+			if (playerChoiceIsShowing) {
+				Debug.Log("Choose player text");
+				playerChosenText.text = currentChoiceWidgets[nodeData.commentIndex].DialogueText;
+				playerChosenText.enabled = true;
+
+				foreach (DialogueChoiceWidget choice in currentChoiceWidgets) {
+					Destroy(choice.gameObject);
+				}
+			}
+			else {
+				VD.Next();
+			}
+		}
+	}
+
+	private void UpdateCommentChoice(VD.NodeData nodeData) {
 		if (GameInput.Instance.Service.PreviousChoiceButtonDown()) {
 			if (nodeData.commentIndex == 0) {
-				nodeData.commentIndex = currentChoices.Count - 1;
+				nodeData.commentIndex = currentChoiceWidgets.Count - 1;
 			}
 			else {
 				nodeData.commentIndex--;
@@ -85,7 +95,7 @@ public class DialogueUI : MonoBehaviour {
 			UpdateChoiceVisuals(nodeData.commentIndex);
 		}
 		else if (GameInput.Instance.Service.NextChoiceButtonDown()) {
-			if (nodeData.commentIndex == currentChoices.Count - 1) {
+			if (nodeData.commentIndex == currentChoiceWidgets.Count - 1) {
 				nodeData.commentIndex = 0;
 			}
 			else {
@@ -96,12 +106,12 @@ public class DialogueUI : MonoBehaviour {
 	}
 
 	private void UpdateChoiceVisuals(int commentIndex) {
-		for (int i = 0; i < currentChoices.Count; i++) {
+		for (int i = 0; i < currentChoiceWidgets.Count; i++) {
 			if (i == commentIndex) {
-				currentChoices[i].color = textColorHighlight;
+				currentChoiceWidgets[i].UpdateHightlight(true);
 			}
 			else {
-				currentChoices[i].color = textColorDefault;
+				currentChoiceWidgets[i].UpdateHightlight(false);
 			}
 		}
 	}
@@ -116,10 +126,7 @@ public class DialogueUI : MonoBehaviour {
 
 	private void OnNodeChange(VD.NodeData nodeData) {
 		// Reset some variables and previous player choices
-		foreach(TMP_Text choice in currentChoices) {
-			Destroy(choice.gameObject);
-		}
-		currentChoices.Clear();
+		currentChoiceWidgets.Clear();
 		playerContainer.SetActive(false);
 		npcContainer.SetActive(false);
 
@@ -128,13 +135,20 @@ public class DialogueUI : MonoBehaviour {
 			bool useCustomNodeSprite = nodeData.sprite != null;
 			playerImage.sprite = useCustomNodeSprite ? nodeData.sprite : VD.assigned.defaultPlayerSprite;
 
-			for (int i = 0; i < nodeData.comments.Length; i++) {
-				TMP_Text newChoiceText = Instantiate(playerChoiceTemplate, playerChoiceTemplate.transform.position, Quaternion.identity, playerChoiceTemplate.transform.parent);
-				newChoiceText.gameObject.SetActive(true);
-				newChoiceText.text = nodeData.comments[i];
-				currentChoices.Add(newChoiceText);
+			if (nodeData.comments.Length > 1) {
+				for (int i = 0; i < nodeData.comments.Length; i++) {
+					DialogueChoiceWidget newChoiceWidget = Instantiate(playerChoiceWidgetTemplate, playerChoiceWidgetTemplate.transform.position, Quaternion.identity, playerChoiceWidgetTemplate.transform.parent);
+					newChoiceWidget.Initialize(nodeData.comments[i], nodeData.extraVars);
+					currentChoiceWidgets.Add(newChoiceWidget);
+				}
+
+				UpdateChoiceVisuals(nodeData.commentIndex);
+				playerChosenText.enabled = false;
 			}
-			UpdateChoiceVisuals(nodeData.commentIndex);
+			else {
+				playerChosenText.text = DialogueChoiceWidget.GetDialogueText(nodeData.comments[0], nodeData.extraVars);
+				playerChosenText.enabled = true;
+			}
 
 			bool useCustomNodeLabel = !string.IsNullOrEmpty(nodeData.tag);
 			playerLabelText.text = useCustomNodeLabel ? nodeData.tag : playerDisplayName;
