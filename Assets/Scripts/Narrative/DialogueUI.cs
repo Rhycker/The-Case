@@ -76,20 +76,20 @@ public class DialogueUI : MonoBehaviour {
 		if (nodeData.pausedAction) { return; }
 
 		if (GameInput.Instance.Service.PreviousChoiceButtonDown()) {
-			if (nodeData.commentIndex == currentChoices.Count - 1) {
-				nodeData.commentIndex = 0;
-			}
-			else {
-				nodeData.commentIndex++;
-			}
-			UpdateChoiceVisuals(nodeData.commentIndex);
-		}
-		else if (GameInput.Instance.Service.NextChoiceButtonDown()) {
 			if (nodeData.commentIndex == 0) {
 				nodeData.commentIndex = currentChoices.Count - 1;
 			}
 			else {
 				nodeData.commentIndex--;
+			}
+			UpdateChoiceVisuals(nodeData.commentIndex);
+		}
+		else if (GameInput.Instance.Service.NextChoiceButtonDown()) {
+			if (nodeData.commentIndex == currentChoices.Count - 1) {
+				nodeData.commentIndex = 0;
+			}
+			else {
+				nodeData.commentIndex++;
 			}
 			UpdateChoiceVisuals(nodeData.commentIndex);
 		}
