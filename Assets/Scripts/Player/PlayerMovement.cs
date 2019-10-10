@@ -1,14 +1,17 @@
 ﻿using UnityEngine;
 
-public class CharacterMovement : MonoBehaviour {
+public class PlayerMovement : MonoBehaviour {
 
-	[SerializeField] private float movementSpeed = default;
+	[SerializeField] private float movementForce = default;
 	[SerializeField] private SpriteRenderer visuals = default;
 	[SerializeField] private float floorYOffset = default;
 	[SerializeField] private LayerMask obstacleLayerMask = default;	
 	[SerializeField] private Vector2 colliderCheckBoxSize = default;
 
+	private new Rigidbody2D rigidbody;
+
 	private void Awake() {
+		rigidbody = GetComponent<Rigidbody2D>();
 		RoomNavigation.Instance.OnRoomEntered += OnRoomEntered;
 	}
 
@@ -17,18 +20,13 @@ public class CharacterMovement : MonoBehaviour {
 		transform.position = targetPosition;
 	}
 
-	private void Update() {
+	private void FixedUpdate() {
 		float movementInput = GameInput.Instance.Service.Horizontal();
-		if(movementInput == 0) { return; }
+		if (movementInput == 0) { return; }
 
 		visuals.flipX = movementInput < 0f;
-		Vector2 movement = new Vector2();
-		movement.x = movementInput * movementSpeed * Time.deltaTime;
-		Vector2 newPosition = (Vector2)transform.position + movement;
-		bool willHitCollider = Physics2D.OverlapBox(newPosition, colliderCheckBoxSize, 0f, obstacleLayerMask);
-		if (!willHitCollider) {
-			transform.position = newPosition;
-		}
+		Vector2 force = new Vector2(movementInput * movementForce, 0f);
+		rigidbody.AddForce(force);
 	}
 
 #if UNITY_EDITOR
