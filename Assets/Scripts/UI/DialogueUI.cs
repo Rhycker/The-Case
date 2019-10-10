@@ -175,4 +175,11 @@ public class DialogueUI : MonoBehaviour {
 		VD.EndDialogue();
 	}
 
+#if UNITY_EDITOR
+	public void Editor_SetUIActive(bool active) {
+		if(dialogueContainer == null) { return; }
+		dialogueContainer.SetActive(active);
+	}
+#endif
+
 }
