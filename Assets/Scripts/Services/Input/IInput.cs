@@ -4,5 +4,7 @@
 	bool InventoryButtonDown();
 	bool BackButtonDown();
 	bool InteractButtonDown();
-	
+	bool PreviousChoiceButtonDown();
+	bool NextChoiceButtonDown();
+
 }

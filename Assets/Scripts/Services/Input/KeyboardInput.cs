@@ -24,4 +24,13 @@ public class KeyboardInput : IInput {
 		return Input.GetKeyDown(KeyCode.DownArrow);
 	}
 
+	public bool PreviousChoiceButtonDown() {
+		return Input.GetKeyDown(KeyCode.W);
+	}
+
+	public bool NextChoiceButtonDown() {
+		return Input.GetKeyDown(KeyCode.S);
+
+	}
+
 }
