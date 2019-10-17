@@ -5,21 +5,21 @@ public class DoorEditor : Editor {
 
 	private Door targetScript;
 	private Room selectedRoom;
-	private bool doorIsOpen = true;
+	private bool doorIsLocked = true;
 
 	public override void OnInspectorGUI() {
 		base.OnInspectorGUI();
 
 		targetScript = (Door)target;
-		bool newDoorIsOpen = serializedObject.FindProperty("isOpen").boolValue;
+		bool newDoorIsLocked = serializedObject.FindProperty("isLocked").boolValue;
 
-		if (targetScript.TargetRoom != selectedRoom || newDoorIsOpen != doorIsOpen) {
+		if (targetScript.TargetRoom != selectedRoom || newDoorIsLocked != doorIsLocked) {
 			selectedRoom = targetScript.TargetRoom;
-			doorIsOpen = newDoorIsOpen;
+			doorIsLocked = newDoorIsLocked;
 
 			string doorName = "DoorTo:" + targetScript.TargetRoom.name;
-			if (!newDoorIsOpen) {
-				doorName = doorName + " (closed)";
+			if (newDoorIsLocked) {
+				doorName = doorName + " (locked)";
 			}
 			targetScript.transform.name = doorName;
 		}

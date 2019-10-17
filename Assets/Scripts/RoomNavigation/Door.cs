@@ -5,12 +5,19 @@ public class Door : MonoBehaviour, IInteractable {
 	public Room TargetRoom { get { return targetRoom; } }
 
 	[SerializeField] private Room targetRoom;
-	[SerializeField] private bool isOpen = true;
+	[SerializeField] private DoorBlockingCharacter doorBlockingCharacter;
+	[SerializeField] private bool isLocked = false;
 
 	private Room myRoom;
 
 	public void Interact() {
-		if (!isOpen) { return; }
+		if(doorBlockingCharacter != null) {
+			if (doorBlockingCharacter.BlockDoor) {
+				doorBlockingCharacter.ShowBlockDoorDialogue();
+				return;
+			}
+		}
+		if (isLocked) { return; }
 
 		if(targetRoom == null) {
 			Debug.LogWarning("There is no room available for this door...", transform);

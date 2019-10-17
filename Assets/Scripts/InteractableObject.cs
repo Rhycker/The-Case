@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+// This is not needed, can all be put in the IInteractable implementation
 public class InteractableObject : MonoBehaviour {
 
 	[SerializeField] private GameObject interactionIcon;

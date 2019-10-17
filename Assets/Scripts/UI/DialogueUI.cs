@@ -31,17 +31,20 @@ public class DialogueUI : MonoBehaviour {
 	private List<DialogueChoiceWidget> currentChoiceWidgets;
 	private string playerDisplayName;
 
+	private Action onDialogueFinished;
+
 	public void SetPlayerName(string displayName) {
 		playerDisplayName = displayName;
 	}
 
-	public void StartDialogue(VIDE_Assign dialogue) {
+	public void StartDialogue(VIDE_Assign dialogue, Action onDialogueFinishedCallback = null) {
 		if (VD.isActive) { return; }
 
 		playerLabelText.text = "";
 		npcText.text = "";
 		npcLabelText.text = "";
 
+		onDialogueFinished = onDialogueFinishedCallback;
 		IsActive = true;
 		VD.BeginDialogue(dialogue);
 
@@ -52,7 +55,9 @@ public class DialogueUI : MonoBehaviour {
 		Instance = this;
 
 		//VD.LoadDialogues();
+#if !UNITY_EDITOR
 		VD.LoadState(SAVE_GAME_NAME, true);
+#endif
 
 		currentChoiceWidgets = new List<DialogueChoiceWidget>();
 		dialogueContainer.SetActive(false);
@@ -72,7 +77,6 @@ public class DialogueUI : MonoBehaviour {
 
 		if (GameInput.Instance.Service.InteractButtonDown()) {
 			if (playerChoiceIsShowing) {
-				Debug.Log("Choose player text");
 				playerChosenText.text = currentChoiceWidgets[nodeData.commentIndex].DialogueText;
 				playerChosenText.enabled = true;
 
@@ -119,6 +123,7 @@ public class DialogueUI : MonoBehaviour {
 	}
 
 	private void OnDialogueEnd(VD.NodeData nodeData) {
+		onDialogueFinished?.Invoke();
 		IsActive = false;
 		dialogueContainer.SetActive(false);
 		VD.EndDialogue();
@@ -177,6 +182,7 @@ public class DialogueUI : MonoBehaviour {
 	private void OnDisable() {
 		VD.OnNodeChange -= OnNodeChange;
 		VD.OnEnd -= OnDialogueEnd;
+		onDialogueFinished = null;
 		IsActive = false;
 		dialogueContainer.SetActive(false);
 		VD.EndDialogue();

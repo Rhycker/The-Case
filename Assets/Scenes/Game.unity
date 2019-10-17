@@ -245,6 +245,11 @@ PrefabInstance:
       propertyPath: isOpen
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6434181768019966596, guid: b985b1ec234211e49920b4415a1587fe,
+        type: 3}
+      propertyPath: isLocked
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6434181768019966603, guid: b985b1ec234211e49920b4415a1587fe,
         type: 3}
       propertyPath: m_Color.r
@@ -456,6 +461,174 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &163191147
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 163191148}
+  - component: {fileID: 163191152}
+  - component: {fileID: 163191151}
+  - component: {fileID: 163191150}
+  - component: {fileID: 163191149}
+  m_Layer: 0
+  m_Name: officer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &163191148
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 163191147}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -3.4916592, y: -3.0037775, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 861540682}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &163191149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 163191147}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6a4fe5ca06f2454eb0c9855dd78554f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  doorBlockOverrideStartNode: 5
+--- !u!114 &163191150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 163191147}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b8b99d8a12e39e4b94d2d7162c7c978, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  diags:
+  - C_Civilian
+  - C_OfficerOutside
+  - Charlie
+  - Charona
+  - CrazyCap
+  - DEMO_Condition
+  - demo_Narration
+  - Example3Dialogue
+  - Example4_dialogue
+  - Horse
+  - Item_LookUp
+  - Laura
+  - Mother
+  - MrCube
+  - NPCOnly
+  - QuestChartDemo
+  - TriggeredDude
+  - Witch
+  assignedIndex: 1
+  assignedID: 4313
+  assignedDialogue: C_OfficerOutside
+  interactionCount: 0
+  alias: Officier
+  overrideStartNode: -1
+  defaultNPCSprite: {fileID: 0}
+  defaultPlayerSprite: {fileID: 0}
+  targetManager: {fileID: 0}
+  preload: 0
+  notuptodate: 0
+  startp: 0
+  loadtag: 
+  langs: []
+  S_playerDiags: []
+  S_actionNodes: []
+--- !u!61 &163191151
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 163191147}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.008298874, y: 0.35062158}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.29736853, y: 0.70124316}
+  m_EdgeRadius: 0
+--- !u!212 &163191152
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 163191147}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300004, guid: b6276bdfdcf8c784b84b5a5cae6905a1, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
 --- !u!1001 &187736215
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -537,6 +710,11 @@ PrefabInstance:
         type: 3}
       propertyPath: isOpen
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6434181768019966596, guid: b985b1ec234211e49920b4415a1587fe,
+        type: 3}
+      propertyPath: isLocked
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6434181768019966603, guid: b985b1ec234211e49920b4415a1587fe,
         type: 3}
@@ -648,6 +826,11 @@ PrefabInstance:
         type: 3}
       propertyPath: isOpen
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6434181768019966596, guid: b985b1ec234211e49920b4415a1587fe,
+        type: 3}
+      propertyPath: isLocked
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6434181768019966603, guid: b985b1ec234211e49920b4415a1587fe,
         type: 3}
@@ -812,11 +995,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 1
+  m_havePropertiesChanged: 0
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 1
+  m_isInputParsingRequired: 0
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -919,6 +1102,11 @@ PrefabInstance:
         type: 3}
       propertyPath: isOpen
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6434181768019966596, guid: b985b1ec234211e49920b4415a1587fe,
+        type: 3}
+      propertyPath: isLocked
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6434181768019966603, guid: b985b1ec234211e49920b4415a1587fe,
         type: 3}
@@ -1049,7 +1237,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 214972184}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.39, y: 0, z: -10}
+  m_LocalPosition: {x: -0.39, y: -1, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1067,7 +1255,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 762b1fbfab3e92c419fc4f3b0056abc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  floorYOffset: 4
+  floorYOffset: 3
 --- !u!1 &224841542
 GameObject:
   m_ObjectHideFlags: 0
@@ -1837,6 +2025,11 @@ PrefabInstance:
       propertyPath: isOpen
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6434181768019966596, guid: b985b1ec234211e49920b4415a1587fe,
+        type: 3}
+      propertyPath: isLocked
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6434181768019966603, guid: b985b1ec234211e49920b4415a1587fe,
         type: 3}
       propertyPath: m_Color.r
@@ -1907,10 +2100,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 305077206}
-  - component: {fileID: 305077203}
   - component: {fileID: 305077202}
   - component: {fileID: 305077205}
   - component: {fileID: 305077207}
+  - component: {fileID: 305077203}
   - component: {fileID: 305077204}
   - component: {fileID: 305077208}
   m_Layer: 0
@@ -1934,7 +2127,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementForce: 18
   visuals: {fileID: 2040753782}
-  floorYOffset: 0.5
+  floorYOffset: 0
   obstacleLayerMask:
     serializedVersion: 2
     m_Bits: 256
@@ -2394,6 +2587,11 @@ PrefabInstance:
       propertyPath: isOpen
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6434181768019966596, guid: b985b1ec234211e49920b4415a1587fe,
+        type: 3}
+      propertyPath: isLocked
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6434181768019966603, guid: b985b1ec234211e49920b4415a1587fe,
         type: 3}
       propertyPath: m_Color.r
@@ -2497,85 +2695,6 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
---- !u!1 &478282538
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 478282539}
-  - component: {fileID: 478282540}
-  m_Layer: 0
-  m_Name: policeOfficer
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &478282539
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 478282538}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.7, y: -3.0009995, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 861540682}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &478282540
-SpriteRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 478282538}
-  m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
-  m_SelectedEditorRenderState: 0
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300004, guid: b6276bdfdcf8c784b84b5a5cae6905a1, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
-  m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
-  m_AdaptiveModeThreshold: 0.5
-  m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
 --- !u!1 &487159184
 GameObject:
   m_ObjectHideFlags: 0
@@ -2726,11 +2845,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 1
+  m_havePropertiesChanged: 0
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 1
+  m_isInputParsingRequired: 0
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -2781,7 +2900,7 @@ PrefabInstance:
     - target: {fileID: 6434181768019966600, guid: b985b1ec234211e49920b4415a1587fe,
         type: 3}
       propertyPath: m_Name
-      value: DoorTo:Garden (closed)
+      value: DoorTo:Garden (locked)
       objectReference: {fileID: 0}
     - target: {fileID: 6434181768019966601, guid: b985b1ec234211e49920b4415a1587fe,
         type: 3}
@@ -2957,6 +3076,11 @@ PrefabInstance:
         type: 3}
       propertyPath: isOpen
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6434181768019966596, guid: b985b1ec234211e49920b4415a1587fe,
+        type: 3}
+      propertyPath: isLocked
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6434181768019966603, guid: b985b1ec234211e49920b4415a1587fe,
         type: 3}
@@ -3436,11 +3560,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 1
+  m_havePropertiesChanged: 0
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 1
+  m_isInputParsingRequired: 0
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -3628,6 +3752,11 @@ PrefabInstance:
         type: 3}
       propertyPath: isOpen
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6434181768019966596, guid: b985b1ec234211e49920b4415a1587fe,
+        type: 3}
+      propertyPath: isLocked
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6434181768019966603, guid: b985b1ec234211e49920b4415a1587fe,
         type: 3}
@@ -3838,6 +3967,11 @@ PrefabInstance:
         type: 3}
       propertyPath: isOpen
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6434181768019966596, guid: b985b1ec234211e49920b4415a1587fe,
+        type: 3}
+      propertyPath: isLocked
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6434181768019966603, guid: b985b1ec234211e49920b4415a1587fe,
         type: 3}
@@ -4678,7 +4812,7 @@ PrefabInstance:
     - target: {fileID: 6434181768019966600, guid: b985b1ec234211e49920b4415a1587fe,
         type: 3}
       propertyPath: m_Name
-      value: DoorTo:Sewers (closed)
+      value: DoorTo:Sewers (locked)
       objectReference: {fileID: 0}
     - target: {fileID: 6434181768019966601, guid: b985b1ec234211e49920b4415a1587fe,
         type: 3}
@@ -4856,7 +4990,7 @@ Transform:
   - {fileID: 555866818}
   - {fileID: 829130883}
   - {fileID: 1684632856}
-  - {fileID: 478282539}
+  - {fileID: 163191148}
   m_Father: {fileID: 439408939}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5915,7 +6049,7 @@ PrefabInstance:
     - target: {fileID: 6434181768019966600, guid: b985b1ec234211e49920b4415a1587fe,
         type: 3}
       propertyPath: m_Name
-      value: DoorTo:Basement (closed)
+      value: DoorTo:Basement (locked)
       objectReference: {fileID: 0}
     - target: {fileID: 6434181768019966601, guid: b985b1ec234211e49920b4415a1587fe,
         type: 3}
@@ -5990,17 +6124,17 @@ PrefabInstance:
     - target: {fileID: 6434181768019966603, guid: b985b1ec234211e49920b4415a1587fe,
         type: 3}
       propertyPath: m_Color.r
-      value: 1
+      value: 0.4528302
       objectReference: {fileID: 0}
     - target: {fileID: 6434181768019966603, guid: b985b1ec234211e49920b4415a1587fe,
         type: 3}
       propertyPath: m_Color.g
-      value: 1
+      value: 0.4528302
       objectReference: {fileID: 0}
     - target: {fileID: 6434181768019966603, guid: b985b1ec234211e49920b4415a1587fe,
         type: 3}
       propertyPath: m_Color.b
-      value: 1
+      value: 0.4528302
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b985b1ec234211e49920b4415a1587fe, type: 3}
@@ -6272,6 +6406,11 @@ PrefabInstance:
       propertyPath: isOpen
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6434181768019966596, guid: b985b1ec234211e49920b4415a1587fe,
+        type: 3}
+      propertyPath: isLocked
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6434181768019966603, guid: b985b1ec234211e49920b4415a1587fe,
         type: 3}
       propertyPath: m_Color.r
@@ -6488,11 +6627,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 1
+  m_havePropertiesChanged: 0
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 1
+  m_isInputParsingRequired: 0
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -6626,6 +6765,11 @@ PrefabInstance:
       propertyPath: isOpen
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6434181768019966596, guid: b985b1ec234211e49920b4415a1587fe,
+        type: 3}
+      propertyPath: isLocked
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6434181768019966603, guid: b985b1ec234211e49920b4415a1587fe,
         type: 3}
       propertyPath: m_Color.r
@@ -6730,6 +6874,11 @@ PrefabInstance:
         type: 3}
       propertyPath: isOpen
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6434181768019966596, guid: b985b1ec234211e49920b4415a1587fe,
+        type: 3}
+      propertyPath: isLocked
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6434181768019966603, guid: b985b1ec234211e49920b4415a1587fe,
         type: 3}
@@ -9159,6 +9308,11 @@ PrefabInstance:
       propertyPath: isOpen
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6434181768019966596, guid: b985b1ec234211e49920b4415a1587fe,
+        type: 3}
+      propertyPath: isLocked
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b985b1ec234211e49920b4415a1587fe, type: 3}
 --- !u!1001 &1219161529
@@ -9242,6 +9396,11 @@ PrefabInstance:
         type: 3}
       propertyPath: isOpen
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6434181768019966596, guid: b985b1ec234211e49920b4415a1587fe,
+        type: 3}
+      propertyPath: isLocked
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6434181768019966603, guid: b985b1ec234211e49920b4415a1587fe,
         type: 3}
@@ -9347,6 +9506,11 @@ PrefabInstance:
         type: 3}
       propertyPath: isOpen
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6434181768019966596, guid: b985b1ec234211e49920b4415a1587fe,
+        type: 3}
+      propertyPath: isLocked
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6434181768019966603, guid: b985b1ec234211e49920b4415a1587fe,
         type: 3}
@@ -11757,6 +11921,11 @@ PrefabInstance:
         type: 3}
       propertyPath: isOpen
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6434181768019966596, guid: b985b1ec234211e49920b4415a1587fe,
+        type: 3}
+      propertyPath: isLocked
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6434181768019966603, guid: b985b1ec234211e49920b4415a1587fe,
         type: 3}
@@ -14640,6 +14809,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   diags:
   - C_Civilian
+  - C_OfficerOutside
   - Charlie
   - Charona
   - CrazyCap
@@ -14907,6 +15077,11 @@ PrefabInstance:
       propertyPath: isOpen
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6434181768019966596, guid: b985b1ec234211e49920b4415a1587fe,
+        type: 3}
+      propertyPath: isLocked
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6434181768019966603, guid: b985b1ec234211e49920b4415a1587fe,
         type: 3}
       propertyPath: m_Color.r
@@ -15103,6 +15278,11 @@ PrefabInstance:
       propertyPath: isOpen
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6434181768019966596, guid: b985b1ec234211e49920b4415a1587fe,
+        type: 3}
+      propertyPath: isLocked
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6434181768019966603, guid: b985b1ec234211e49920b4415a1587fe,
         type: 3}
       propertyPath: m_Color.r
@@ -15241,11 +15421,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 1
+  m_havePropertiesChanged: 0
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 1
+  m_isInputParsingRequired: 0
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -16765,5 +16945,15 @@ PrefabInstance:
       propertyPath: isOpen
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6434181768019966596, guid: b985b1ec234211e49920b4415a1587fe,
+        type: 3}
+      propertyPath: isLocked
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6434181768019966596, guid: b985b1ec234211e49920b4415a1587fe,
+        type: 3}
+      propertyPath: doorBlockingCharacter
+      value: 
+      objectReference: {fileID: 163191149}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b985b1ec234211e49920b4415a1587fe, type: 3}
