@@ -3,6 +3,7 @@ using UnityEngine;
 using VIDE_Data;
 using TMPro;
 using UnityEngine.UI;
+using System;
 
 // Example: VIDEUIManager1.cs
 [DefaultExecutionOrder(-1)]
@@ -11,6 +12,8 @@ public class DialogueUI : MonoBehaviour {
 	private const string SAVE_GAME_NAME = "Game";
 
 	public static DialogueUI Instance { get; private set; }
+
+	public bool IsActive { get; private set; }
 
 	[SerializeField] private GameObject dialogueContainer;
 	[Space]
@@ -39,8 +42,7 @@ public class DialogueUI : MonoBehaviour {
 		npcText.text = "";
 		npcLabelText.text = "";
 
-		VD.OnNodeChange += OnNodeChange;
-		VD.OnEnd += OnDialogueEnd;
+		IsActive = true;
 		VD.BeginDialogue(dialogue);
 
 		dialogueContainer.SetActive(true);
@@ -117,8 +119,7 @@ public class DialogueUI : MonoBehaviour {
 	}
 
 	private void OnDialogueEnd(VD.NodeData nodeData) {
-		VD.OnNodeChange -= OnNodeChange;
-		VD.OnEnd -= OnDialogueEnd;
+		IsActive = false;
 		dialogueContainer.SetActive(false);
 		VD.EndDialogue();
 		VD.SaveState(SAVE_GAME_NAME, true);
@@ -168,9 +169,15 @@ public class DialogueUI : MonoBehaviour {
 		}
 	}
 
+	private void OnEnable() {
+		VD.OnNodeChange += OnNodeChange;
+		VD.OnEnd += OnDialogueEnd;
+	}
+
 	private void OnDisable() {
 		VD.OnNodeChange -= OnNodeChange;
 		VD.OnEnd -= OnDialogueEnd;
+		IsActive = false;
 		dialogueContainer.SetActive(false);
 		VD.EndDialogue();
 	}
