@@ -9,9 +9,11 @@ public class PlayerMovement : MonoBehaviour {
 	[SerializeField] private Vector2 colliderCheckBoxSize = default;
 
 	private new Rigidbody2D rigidbody;
+	private bool flipXViewRight;
 
 	private void Awake() {
 		rigidbody = GetComponent<Rigidbody2D>();
+		flipXViewRight = visuals.flipX;
 		RoomNavigation.Instance.OnRoomEntered += OnRoomEntered;
 	}
 
@@ -24,7 +26,14 @@ public class PlayerMovement : MonoBehaviour {
 		float movementInput = GameInput.Instance.Service.Horizontal();
 		if (movementInput == 0) { return; }
 
-		visuals.flipX = movementInput < 0f;
+		bool lookLeft = movementInput < 0f;
+		if (lookLeft) {
+			visuals.flipX = !flipXViewRight;
+		}
+		else {
+			visuals.flipX = flipXViewRight;
+		}
+
 		Vector2 force = new Vector2(movementInput * movementForce, 0f);
 		rigidbody.AddForce(force);
 	}
