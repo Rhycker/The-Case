@@ -21,7 +21,6 @@ public class DialogueUI : MonoBehaviour {
 	[SerializeField] private DialogueChoiceWidget playerChoiceWidgetTemplate;
 	[SerializeField] private Image playerImage;
 	[SerializeField] private TMP_Text playerLabelText;
-	[SerializeField] private TMP_Text playerChosenText;
 	[Space]
 	[SerializeField] private GameObject npcContainer;
 	[SerializeField] private Image npcImage;
@@ -62,7 +61,6 @@ public class DialogueUI : MonoBehaviour {
 		currentChoiceWidgets = new List<DialogueChoiceWidget>();
 		dialogueContainer.SetActive(false);
 		playerChoiceWidgetTemplate.gameObject.SetActive(false);
-		playerChosenText.enabled = false;
 	}
 
 	private void Update() {
@@ -70,23 +68,13 @@ public class DialogueUI : MonoBehaviour {
 		VD.NodeData nodeData = VD.nodeData;
 		if (nodeData.pausedAction) { return; }
 
-		bool playerChoiceIsShowing = nodeData.isPlayer && !playerChosenText.enabled;
+		bool playerChoiceIsShowing = nodeData.isPlayer && nodeData.comments.Length > 1;
 		if (playerChoiceIsShowing) {
 			UpdateCommentChoice(nodeData);
 		}
 
 		if (GameInput.Instance.Service.InteractButtonDown()) {
-			if (playerChoiceIsShowing) {
-				playerChosenText.text = currentChoiceWidgets[nodeData.commentIndex].DialogueText;
-				playerChosenText.enabled = true;
-
-				foreach (DialogueChoiceWidget choice in currentChoiceWidgets) {
-					Destroy(choice.gameObject);
-				}
-			}
-			else {
-				VD.Next();
-			}
+			VD.Next();
 		}
 	}
 
@@ -132,6 +120,9 @@ public class DialogueUI : MonoBehaviour {
 
 	private void OnNodeChange(VD.NodeData nodeData) {
 		// Reset some variables and previous player choices
+		foreach (DialogueChoiceWidget choice in currentChoiceWidgets) {
+			Destroy(choice.gameObject);
+		}
 		currentChoiceWidgets.Clear();
 		playerContainer.SetActive(false);
 		npcContainer.SetActive(false);
@@ -141,19 +132,13 @@ public class DialogueUI : MonoBehaviour {
 			bool useCustomNodeSprite = nodeData.sprite != null;
 			playerImage.sprite = useCustomNodeSprite ? nodeData.sprite : VD.assigned.defaultPlayerSprite;
 
-			if (nodeData.comments.Length > 1) {
-				for (int i = 0; i < nodeData.comments.Length; i++) {
-					DialogueChoiceWidget newChoiceWidget = Instantiate(playerChoiceWidgetTemplate, playerChoiceWidgetTemplate.transform.position, Quaternion.identity, playerChoiceWidgetTemplate.transform.parent);
-					newChoiceWidget.Initialize(nodeData.comments[i], nodeData.extraVars);
-					currentChoiceWidgets.Add(newChoiceWidget);
-				}
-
-				UpdateChoiceVisuals(nodeData.commentIndex);
-				playerChosenText.enabled = false;
+			for (int i = 0; i < nodeData.comments.Length; i++) {
+				DialogueChoiceWidget newChoiceWidget = Instantiate(playerChoiceWidgetTemplate, playerChoiceWidgetTemplate.transform.position, Quaternion.identity, playerChoiceWidgetTemplate.transform.parent);
+				newChoiceWidget.Initialize(nodeData.comments[i], nodeData.extraVars);
+				currentChoiceWidgets.Add(newChoiceWidget);
 			}
-			else {
-				playerChosenText.text = DialogueChoiceWidget.GetDialogueText(nodeData.comments[0], nodeData.extraVars);
-				playerChosenText.enabled = true;
+			if (nodeData.comments.Length > 1) {
+				UpdateChoiceVisuals(nodeData.commentIndex);
 			}
 
 			bool useCustomNodeLabel = !string.IsNullOrEmpty(nodeData.tag);
