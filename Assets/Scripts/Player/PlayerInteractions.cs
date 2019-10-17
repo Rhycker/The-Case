@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
 
-public class CharacterInteractions : MonoBehaviour {
+public class PlayerInteractions : MonoBehaviour {
 
 	private InteractableObject interactableObject;
 
 	private void Update() {
-		if(interactableObject == null) { return; }
+		if (interactableObject == null) { return; }
+		if (DialogueUI.Instance.IsActive) { return; }
 		if (!GameInput.Instance.Service.InteractButtonDown()) { return; }
 		interactableObject.Interact();
 	}

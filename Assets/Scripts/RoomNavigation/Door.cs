@@ -6,13 +6,15 @@ public class Door : MonoBehaviour, IInteractable {
 
 	[SerializeField] private Room targetRoom;
 	[SerializeField] private DoorBlockingCharacter doorBlockingCharacter;
+	[SerializeField] private GameEvent stopBlockingEvent;//only used if doorBlockingCharacter != null
 	[SerializeField] private bool isLocked = false;
 
 	private Room myRoom;
 
 	public void Interact() {
 		if(doorBlockingCharacter != null) {
-			if (doorBlockingCharacter.BlockDoor) {
+			bool requireEventCompletion = stopBlockingEvent != null && Progression.Instance.EventIsCompleted(stopBlockingEvent);
+			if (doorBlockingCharacter.BlockDoor || requireEventCompletion) {
 				doorBlockingCharacter.ShowBlockDoorDialogue();
 				return;
 			}
