@@ -13,6 +13,9 @@ public class CharacterInteractions : MonoBehaviour {
 	private void OnTriggerEnter2D(Collider2D collider) {
 		if(collider.tag != "Interactable") { return; }
 
+		if(interactableObject != null) {
+			interactableObject.ShowInteractIcon(false);
+		}
 		interactableObject = collider.GetComponent<InteractableObject>();
 		if(interactableObject == null) {
 			Debug.LogWarning("No interactable object on " + collider.name);
