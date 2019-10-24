@@ -15,7 +15,7 @@ public class Door : MonoBehaviour, IInteractable {
 		if(doorBlockingCharacter != null) {
 			bool requireEventCompletion = stopBlockingEvent != null && Progression.Instance.EventIsCompleted(stopBlockingEvent);
 			if (doorBlockingCharacter.BlockDoor || requireEventCompletion) {
-				doorBlockingCharacter.ShowBlockDoorDialogue();
+				doorBlockingCharacter.ShowBlockDoorDialogue(OnAccessGranted);
 				return;
 			}
 		}
@@ -34,6 +34,10 @@ public class Door : MonoBehaviour, IInteractable {
 		if(myRoom == null) {
 			Debug.LogWarning(transform.name + " does not have a Room parent! Please make sure this door is child of a room", transform);
 		}
+	}
+
+	private void OnAccessGranted() {
+		RoomNavigation.Instance.EnterNextRoom(myRoom, targetRoom);
 	}
 
 }

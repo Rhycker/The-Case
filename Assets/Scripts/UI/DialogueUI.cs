@@ -78,6 +78,13 @@ public class DialogueUI : MonoBehaviour {
 		}
 	}
 
+	// Make sure that IsActive is set after the normal update loop, so that we wont have any other interaction in this frame
+	private void LateUpdate() {
+		if(IsActive && !dialogueContainer.activeInHierarchy) {
+			IsActive = false;
+		}
+	}
+
 	private void UpdateCommentChoice(VD.NodeData nodeData) {
 		if (GameInput.Instance.Service.PreviousChoiceButtonDown()) {
 			if (nodeData.commentIndex == 0) {
@@ -112,7 +119,6 @@ public class DialogueUI : MonoBehaviour {
 
 	private void OnDialogueEnd(VD.NodeData nodeData) {
 		onDialogueFinished?.Invoke();
-		IsActive = false;
 		dialogueContainer.SetActive(false);
 		VD.EndDialogue();
 		VD.SaveState(SAVE_GAME_NAME, true);

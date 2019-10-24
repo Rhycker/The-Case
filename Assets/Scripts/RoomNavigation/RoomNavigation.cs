@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class RoomNavigation : MonoBehaviour {
 
@@ -16,9 +15,17 @@ public class RoomNavigation : MonoBehaviour {
 	public delegate void RoomEnterDelegate(Room nextRoom);
 	public event RoomEnterDelegate OnRoomEntered;
 
+	private Room currentRoom;
+
 	public void EnterNextRoom(Room previous, Room next) {
+		if(previous != currentRoom && currentRoom != null) {
+			Debug.LogWarning("Invalid previous room: " + previous.name);
+			return;
+		}
+
 		next.Prepare(previous);
 		OnRoomEntered.Invoke(next);
+		currentRoom = next;
 	}
 	
 }
