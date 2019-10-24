@@ -8,6 +8,7 @@ public class InventoryPanel : MonoBehaviour {
 	[SerializeField] private ItemInteractionPopup interactionPopup;
 
 	private ItemWidget selectedItemWidget;
+	private bool isCombining;
 
 	public void Activate(bool active) {
 		gameObject.SetActive(active);
@@ -16,17 +17,39 @@ public class InventoryPanel : MonoBehaviour {
 		}
 	}
 
-	public void AddItem(Item item) {
+	public ItemWidget AddItemWidget(Item item) {
 		ItemWidget newItemWidget = Instantiate(itemWidgetTemplate, itemWidgetTemplate.transform.parent);
 		newItemWidget.Initialize(this, item);
 		newItemWidget.gameObject.SetActive(true);
+		interactionPopup.transform.SetAsLastSibling();
+		return newItemWidget;
+	}
+
+	public void StartCombining() {
+		isCombining = true;
 		interactionPopup.Deactivate();
 	}
 
 	public void InteractItemWidget(ItemWidget itemWidget) {
 		if (selectedItemWidget == itemWidget) { return; }
-		selectedItemWidget = itemWidget;
-		interactionPopup.Activate(itemWidget);
+		if (!isCombining) {
+			selectedItemWidget = itemWidget;
+			interactionPopup.Activate(itemWidget);
+		}
+		else {
+			Item combinedItem = selectedItemWidget.Item.Combine(itemWidget.Item);
+			if(combinedItem != null) {
+				Debug.Log("Combining success!");
+				isCombining = false;
+				Destroy(selectedItemWidget);
+				Destroy(itemWidget);
+				selectedItemWidget = AddItemWidget(combinedItem);
+				interactionPopup.Activate(selectedItemWidget);
+			}
+			else {
+				Debug.Log("Can't combine " + selectedItemWidget.Item.name + " with " + itemWidget.Item);
+			}
+		}
 	}
 
 	public void Button_Close() {
@@ -44,7 +67,7 @@ public class InventoryPanel : MonoBehaviour {
 			Item[] allItems = Resources.LoadAll<Item>("Items");
 			Item item = allItems[Random.Range(0, allItems.Length)];
 			Debug.Log("Add random item: " + item.name);
-			AddItem(item);
+			AddItemWidget(item);
 		}
 	}
 }

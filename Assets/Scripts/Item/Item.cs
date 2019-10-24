@@ -20,16 +20,17 @@ public class Item : ScriptableObject {
 
 	private static Item[] allItems;
 
-	public Item CombineWithOther(Item otherItem) {
+	public Item Combine(Item otherItem) {
 		if(allItems == null) {
 			allItems = Resources.LoadAll<Item>("Items");
 		}
 
 		foreach(Item item in allItems) {
-			if(item == this) { continue; }
-			if(item == otherItem) { continue; }
-			if(item.firstIngredient == null) { continue; }
-			if(item.secondIngredient == null) { continue; }
+			if (item == this) { continue; }
+			if (item == otherItem) { continue; }
+			if (item.firstIngredient == null) { continue; }
+			if (item.secondIngredient == null) { continue; }
+			// Hij komt wel hier
 
 			if (firstIngredient == this && secondIngredient == otherItem) {
 				return item;

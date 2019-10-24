@@ -37,7 +37,7 @@ public class ItemInteractionPopup : MonoBehaviour {
 	}
 
 	public void Button_Combine() {
-		Debug.Log("Combine " + item.name);
+		InventoryPanel.Instance.StartCombining();
 	}
 
 	public void Button_Examine() {
