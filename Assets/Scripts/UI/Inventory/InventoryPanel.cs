@@ -2,10 +2,19 @@
 
 public class InventoryPanel : MonoBehaviour {
 
+	public static InventoryPanel Instance;
+
 	[SerializeField] private ItemWidget itemWidgetTemplate;
 	[SerializeField] private ItemInteractionPopup interactionPopup;
 
 	private ItemWidget selectedItemWidget;
+
+	public void Activate(bool active) {
+		gameObject.SetActive(active);
+		if (!active) {
+			interactionPopup.Deactivate();
+		}
+	}
 
 	public void AddItem(Item item) {
 		ItemWidget newItemWidget = Instantiate(itemWidgetTemplate, itemWidgetTemplate.transform.parent);
@@ -20,8 +29,14 @@ public class InventoryPanel : MonoBehaviour {
 		interactionPopup.Activate(itemWidget);
 	}
 
+	public void Button_Close() {
+		Activate(false);
+	}
+
 	private void Awake() {
 		itemWidgetTemplate.gameObject.SetActive(false);
+		Instance = this;
+		Activate(false);
 	}
 
 	private void Update() {
