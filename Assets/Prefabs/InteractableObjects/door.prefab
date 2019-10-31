@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6434181768019966601}
   - component: {fileID: 6434181768019966596}
-  - component: {fileID: 8195612865150507739}
   - component: {fileID: 6434181768019966603}
   - component: {fileID: 6434181768019966602}
   m_Layer: 0
@@ -47,21 +46,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e458d1d4f8f92f243b3076ff944977b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetRoom: {fileID: 0}
-  isOpen: 1
---- !u!114 &8195612865150507739
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6434181768019966600}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b1b09c7d8f5879478d5e5756ee73590, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   interactionIcon: {fileID: 9148243662957846018}
+  targetRoom: {fileID: 0}
+  doorBlockingCharacter: {fileID: 0}
+  stopBlockingEvent: {fileID: 0}
+  isLocked: 0
 --- !u!212 &6434181768019966603
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -1,18 +1,10 @@
 ﻿using UnityEngine;
 
-// This is not needed, can all be put in the IInteractable implementation
-public class InteractableObject : MonoBehaviour {
+public abstract class InteractableObject : MonoBehaviour {
 
 	[SerializeField] private GameObject interactionIcon;
 
-	private IInteractable interactableComponent;
-
-	private void Awake() {
-		interactableComponent = GetComponent<IInteractable>();
-		if(interactableComponent == null) {
-			Debug.LogWarning("No interactable component found on " + transform.name, transform);
-		}
-
+	protected virtual void Awake() {
 		interactionIcon.SetActive(false);
 	}
 
@@ -20,8 +12,6 @@ public class InteractableObject : MonoBehaviour {
 		interactionIcon.SetActive(show);
 	}
 
-	public void Interact() {
-		interactableComponent.Interact();	
-	}
+	public abstract void Interact();
 	
 }

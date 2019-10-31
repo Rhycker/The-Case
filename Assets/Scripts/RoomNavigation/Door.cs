@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Door : MonoBehaviour, IInteractable {
+public class Door : InteractableObject {
 
 	public Room TargetRoom { get { return targetRoom; } }
 
@@ -11,7 +11,7 @@ public class Door : MonoBehaviour, IInteractable {
 
 	private Room myRoom;
 
-	public void Interact() {
+	public override void Interact() {
 		if(doorBlockingCharacter != null) {
 			bool requireEventCompletion = stopBlockingEvent != null && Progression.Instance.EventIsCompleted(stopBlockingEvent);
 			if (doorBlockingCharacter.BlockDoor || requireEventCompletion) {
@@ -29,7 +29,8 @@ public class Door : MonoBehaviour, IInteractable {
 		RoomNavigation.Instance.EnterNextRoom(myRoom, targetRoom);
 	}
 
-	private void Awake() {
+	protected override void Awake() {
+		base.Awake();
 		myRoom = GetComponentInParent<Room>();
 		if(myRoom == null) {
 			Debug.LogWarning(transform.name + " does not have a Room parent! Please make sure this door is child of a room", transform);
