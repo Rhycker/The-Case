@@ -46,8 +46,9 @@ public class InventoryPanel : MonoBehaviour {
 				Destroy(selectedItemWidget);
 				Destroy(itemWidget);
 				selectedItemWidget = AddItemWidget(combinedItem);
-				
-				interactionPopup.Activate(selectedItemWidget);
+				CoroutineHelper.WaitOneFrame(() => {
+					interactionPopup.Activate(selectedItemWidget);
+				});
 			}
 			else {
 				Debug.Log("Can't combine " + selectedItemWidget.Item.name + " with " + itemWidget.Item);
