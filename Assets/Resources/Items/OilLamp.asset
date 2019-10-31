@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1ddfbd1606b7fd4693a8855a7df7b72, type: 3}
   m_Name: OilLamp
   m_EditorClassIdentifier: 
-  icon: {fileID: 0}
+  icon: {fileID: 21300004, guid: a2f6d121e2cbb9a408152d2e53b40be9, type: 3}
   itemUse: 1
   examinationText: A very practical lamp.
   firstIngredient: {fileID: 11400000, guid: 7a2e9620f0a12754f8609a1c4852340c, type: 2}

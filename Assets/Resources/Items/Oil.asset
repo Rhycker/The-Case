@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1ddfbd1606b7fd4693a8855a7df7b72, type: 3}
   m_Name: Oil
   m_EditorClassIdentifier: 
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: a2f6d121e2cbb9a408152d2e53b40be9, type: 3}
   itemUse: 0
   examinationText: I should use this on a lamp to create a oil lamp.
   firstIngredient: {fileID: 0}
