@@ -30,12 +30,11 @@ public class Item : ScriptableObject {
 			if (item == otherItem) { continue; }
 			if (item.firstIngredient == null) { continue; }
 			if (item.secondIngredient == null) { continue; }
-			// Hij komt wel hier
 
-			if (firstIngredient == this && secondIngredient == otherItem) {
+			if (item.firstIngredient == this && item.secondIngredient == otherItem) {
 				return item;
 			}
-			if(firstIngredient == otherItem && secondIngredient == this) {
+			if(item.firstIngredient == otherItem && item.secondIngredient == this) {
 				return item;
 			}
 		}

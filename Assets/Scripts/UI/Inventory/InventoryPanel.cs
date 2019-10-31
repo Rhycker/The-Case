@@ -13,6 +13,8 @@ public class InventoryPanel : MonoBehaviour {
 	public void Activate(bool active) {
 		gameObject.SetActive(active);
 		if (!active) {
+			selectedItemWidget = null;
+			isCombining = false;
 			interactionPopup.Deactivate();
 		}
 	}
@@ -37,13 +39,14 @@ public class InventoryPanel : MonoBehaviour {
 			interactionPopup.Activate(itemWidget);
 		}
 		else {
+			isCombining = false;
 			Item combinedItem = selectedItemWidget.Item.Combine(itemWidget.Item);
 			if(combinedItem != null) {
 				Debug.Log("Combining success!");
-				isCombining = false;
 				Destroy(selectedItemWidget);
 				Destroy(itemWidget);
 				selectedItemWidget = AddItemWidget(combinedItem);
+				
 				interactionPopup.Activate(selectedItemWidget);
 			}
 			else {
