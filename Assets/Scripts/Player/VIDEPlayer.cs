@@ -8,7 +8,7 @@ public class VIDEPlayer : MonoBehaviour {
 	private bool dialogueStarted;
 
 	private void Awake() {
-		DialogueUI.Instance.SetPlayerName(displayName);
+		DialogueUI.Instance.SetPlayerDetails(transform, displayName);
 	}
 
 	private void Update() {

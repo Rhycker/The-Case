@@ -29,11 +29,14 @@ public class DialogueUI : MonoBehaviour {
 
 	private VIDE_Assign currentDialogue;
 	private List<DialogueChoiceWidget> currentChoiceWidgets;
+
+	private Transform playerTransform;
 	private string playerDisplayName;
 
 	private Action onDialogueFinished;
 
-	public void SetPlayerName(string displayName) {
+	public void SetPlayerDetails(Transform playerTransform, string displayName) {
+		this.playerTransform = playerTransform;
 		playerDisplayName = displayName;
 	}
 
@@ -117,15 +120,16 @@ public class DialogueUI : MonoBehaviour {
 	private void UpdateChoiceVisuals(int commentIndex) {
 		for (int i = 0; i < currentChoiceWidgets.Count; i++) {
 			if (i == commentIndex) {
-				currentChoiceWidgets[i].UpdateHightlight(true);
+				currentChoiceWidgets[i].UpdateHighlight(true);
 			}
 			else {
-				currentChoiceWidgets[i].UpdateHightlight(false);
+				currentChoiceWidgets[i].UpdateHighlight(false);
 			}
 		}
 	}
 
 	private void StopDialogue() {
+		TextBalloonUI.Instance.DeactivateUI();
 		onDialogueFinished?.Invoke();
 		dialogueContainer.SetActive(false);
 		VD.EndDialogue();
@@ -158,6 +162,10 @@ public class DialogueUI : MonoBehaviour {
 			if (nodeData.comments.Length > 1) {
 				UpdateChoiceVisuals(nodeData.commentIndex);
 			}
+			else {
+				TextBalloonUI.Instance.ShowText(playerTransform.position, nodeData.comments[nodeData.commentIndex]);
+				//playerText.text = nodeData.comments[nodeData.commentIndex];
+			}
 
 			bool useCustomNodeLabel = !string.IsNullOrEmpty(nodeData.tag);
 			playerLabelText.text = useCustomNodeLabel ? nodeData.tag : playerDisplayName;
@@ -168,7 +176,8 @@ public class DialogueUI : MonoBehaviour {
 			bool useCustomNodeSprite = nodeData.sprite != null;
 			npcImage.sprite = useCustomNodeSprite ? nodeData.sprite : VD.assigned.defaultNPCSprite;
 
-			npcText.text = nodeData.comments[nodeData.commentIndex];
+			TextBalloonUI.Instance.ShowText(currentDialogue.transform.position, nodeData.comments[nodeData.commentIndex], true);
+			//npcText.text = nodeData.comments[nodeData.commentIndex];
 
 			bool useCustomNodeLabel = !string.IsNullOrEmpty(nodeData.tag);
 			npcLabelText.text = useCustomNodeLabel ? nodeData.tag : VD.assigned.alias;

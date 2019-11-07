@@ -15,12 +15,12 @@ public class DialogueChoiceWidget : MonoBehaviour {
 	public void Initialize(string commentText, Dictionary<string, object> extraVars) {
 		gameObject.SetActive(true);
 		text = GetComponent<TMP_Text>();
-		UpdateHightlight(false);
+		UpdateHighlight(false);
 		
 		text.text = commentText;
 	}
 
-	public void UpdateHightlight(bool showHighlight) {
+	public void UpdateHighlight(bool showHighlight) {
 		text.color = showHighlight ? highlightColour : standardColour;
 	}
 
