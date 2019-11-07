@@ -7173,7 +7173,7 @@ PrefabInstance:
     - target: {fileID: 6434181768019966600, guid: b985b1ec234211e49920b4415a1587fe,
         type: 3}
       propertyPath: m_Name
-      value: DoorTo:BedroomDaughter
+      value: DoorTo:CrimeScene
       objectReference: {fileID: 0}
     - target: {fileID: 6434181768019966601, guid: b985b1ec234211e49920b4415a1587fe,
         type: 3}
@@ -7239,7 +7239,7 @@ PrefabInstance:
         type: 3}
       propertyPath: targetRoom
       value: 
-      objectReference: {fileID: 954968491}
+      objectReference: {fileID: 723737034}
     - target: {fileID: 6434181768019966596, guid: b985b1ec234211e49920b4415a1587fe,
         type: 3}
       propertyPath: isOpen
