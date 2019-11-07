@@ -23,7 +23,6 @@ public class PlayerMovement : MonoBehaviour {
 	}
 
 	private void FixedUpdate() {
-		if (DialogueUI.Instance.IsActive) { return; }
 		float movementInput = GameInput.Instance.Service.Horizontal();
 		if (movementInput == 0) { return; }
 

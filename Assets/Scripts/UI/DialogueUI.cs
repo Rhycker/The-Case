@@ -27,6 +27,7 @@ public class DialogueUI : MonoBehaviour {
 	[SerializeField] private TMP_Text npcText;
 	[SerializeField] private TMP_Text npcLabelText;
 
+	private VIDE_Assign currentDialogue;
 	private List<DialogueChoiceWidget> currentChoiceWidgets;
 	private string playerDisplayName;
 
@@ -43,11 +44,18 @@ public class DialogueUI : MonoBehaviour {
 		npcText.text = "";
 		npcLabelText.text = "";
 
+		currentDialogue = dialogue;
 		onDialogueFinished = onDialogueFinishedCallback;
 		IsActive = true;
 		VD.BeginDialogue(dialogue);
 
 		dialogueContainer.SetActive(true);
+	}
+
+	public void StopDialogue(VIDE_Assign dialogue) {
+		if (!VD.isActive) { return; }
+		if(currentDialogue != dialogue) { return; }
+		StopDialogue();
 	}
 
 	private void Awake() {
@@ -117,11 +125,15 @@ public class DialogueUI : MonoBehaviour {
 		}
 	}
 
-	private void OnDialogueEnd(VD.NodeData nodeData) {
+	private void StopDialogue() {
 		onDialogueFinished?.Invoke();
 		dialogueContainer.SetActive(false);
 		VD.EndDialogue();
 		VD.SaveState(SAVE_GAME_NAME, true);
+	}
+
+	private void OnDialogueEnd(VD.NodeData nodeData) {
+		StopDialogue();
 	}
 
 	private void OnNodeChange(VD.NodeData nodeData) {

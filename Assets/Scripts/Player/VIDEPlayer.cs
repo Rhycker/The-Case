@@ -32,6 +32,7 @@ public class VIDEPlayer : MonoBehaviour {
 	private void OnTriggerExit2D(Collider2D other) {
 		VIDE_Assign interactable = other.GetComponent<VIDE_Assign>();
 		if(dialogueInTrigger == interactable) {
+			DialogueUI.Instance.StopDialogue(dialogueInTrigger);
 			dialogueInTrigger = null;
 		}
 	}
