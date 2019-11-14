@@ -7,7 +7,7 @@ using System;
 
 // Example: VIDEUIManager1.cs
 [DefaultExecutionOrder(-1)]
-public class DialogueUI : MonoBehaviour {
+public class DialogueUI : CanvasUI {
 
 	private const string SAVE_GAME_NAME = "Game";
 
@@ -200,12 +200,5 @@ public class DialogueUI : MonoBehaviour {
 		dialogueContainer.SetActive(false);
 		VD.EndDialogue();
 	}
-
-#if UNITY_EDITOR
-	public void Editor_SetUIActive(bool active) {
-		if(dialogueContainer == null) { return; }
-		dialogueContainer.SetActive(active);
-	}
-#endif
 
 }

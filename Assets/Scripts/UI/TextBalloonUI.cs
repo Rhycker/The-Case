@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class TextBalloonUI : MonoBehaviour {
+public class TextBalloonUI : CanvasUI {
 
 	public static TextBalloonUI Instance { get; private set; }
 

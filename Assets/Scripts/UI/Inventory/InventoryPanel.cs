@@ -60,7 +60,7 @@ public class InventoryPanel : MonoBehaviour {
 		Activate(false);
 	}
 
-	private void Awake() {
+	private void Start() {
 		itemWidgetTemplate.gameObject.SetActive(false);
 		Instance = this;
 		Activate(false);
