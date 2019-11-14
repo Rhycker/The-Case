@@ -1,15 +1,21 @@
 ﻿using UnityEngine;
 
+[SelectionBase]
 public class PlayerMovement : MonoBehaviour {
 
 	[SerializeField] private float movementForce = default;
+	[SerializeField] private float ladderClimbSpeed = default;
 	[SerializeField] private SpriteRenderer visuals = default;
 	[SerializeField] private float floorYOffset = default;
 	[SerializeField] private LayerMask obstacleLayerMask = default;	
 	[SerializeField] private Vector2 colliderCheckBoxSize = default;
+	[SerializeField] private float minLadderClimbDistance = default;
 
 	private new Rigidbody2D rigidbody;
 	private bool flipXViewRight;
+
+	private Ladder currentLadder;
+	private bool isClimbingLadder;
 
 	private void Awake() {
 		rigidbody = GetComponent<Rigidbody2D>();
@@ -19,14 +25,64 @@ public class PlayerMovement : MonoBehaviour {
 
 	private void OnRoomEntered(Room nextRoom) {
 		Vector3 targetPosition = new Vector3(nextRoom.PlayerSpawnPositionX, nextRoom.OriginPosition.y + floorYOffset, transform.position.z);
-		transform.position = targetPosition;
+		rigidbody.MovePosition(targetPosition);
 	}
 
 	private void FixedUpdate() {
-		float movementInput = GameInput.Instance.Service.Horizontal();
-		if (movementInput == 0) { return; }
+		bool traverseLadder = TraverseLadder();
+		if (traverseLadder) { return; }
+		MoveHorizontal();
+	}
 
-		bool lookLeft = movementInput < 0f;
+	private bool TraverseLadder() {
+		float verticalInput = GameInput.Instance.Service.Vertical();
+		if (currentLadder == null) { return false; }
+		if (isClimbingLadder && GameInput.Instance.Service.Horizontal() != 0) {
+			StopClimbingLadder();
+			return false;
+		}
+		if (verticalInput == 0) { return isClimbingLadder; }
+
+		if (!isClimbingLadder) {
+			Vector2 ladderPos = currentLadder.transform.position;
+			if (Mathf.Abs(ladderPos.x - transform.position.x) > minLadderClimbDistance) { return false; }
+			if (verticalInput > 0 && ladderPos.y < transform.position.y) { return false; }
+			if (verticalInput < 0 && ladderPos.y > transform.position.y) { return false; }
+
+			StartClimbingLadder();
+			return true;
+		}
+
+		Vector2 newPosition = (Vector2)transform.position + Vector2.up * verticalInput * ladderClimbSpeed * Time.deltaTime;
+		Vector2 endPosition = Vector2.zero;
+		if (currentLadder.StopClimbing(newPosition, out endPosition)) {
+			rigidbody.MovePosition(endPosition);
+			StopClimbingLadder();
+			return false;
+		}
+
+		rigidbody.MovePosition(newPosition);
+		return true;//moet ook nog bewegen en kunnen stoppen
+	}
+
+	private void StartClimbingLadder() {
+		isClimbingLadder = true;
+		rigidbody.isKinematic = true;
+		rigidbody.velocity = Vector2.zero;
+		Vector2 startPosition = currentLadder.GetStartPosition(transform.position);
+		rigidbody.MovePosition(startPosition);
+	}
+
+	private void StopClimbingLadder() {
+		isClimbingLadder = false;
+		rigidbody.isKinematic = false;
+	}
+
+	private void MoveHorizontal() {
+		float horizontalInput = GameInput.Instance.Service.Horizontal();
+		if (horizontalInput == 0) { return; }
+
+		bool lookLeft = horizontalInput < 0f;
 		if (lookLeft) {
 			visuals.flipX = !flipXViewRight;
 		}
@@ -34,8 +90,21 @@ public class PlayerMovement : MonoBehaviour {
 			visuals.flipX = flipXViewRight;
 		}
 
-		Vector2 force = new Vector2(movementInput * movementForce, 0f);
+		Vector2 force = new Vector2(horizontalInput * movementForce, 0f);
 		rigidbody.AddForce(force);
+	}
+
+	private void OnTriggerEnter2D(Collider2D collider) {
+		Ladder ladder = collider.GetComponent<Ladder>();
+		if(ladder == null) { return; }
+		currentLadder = ladder;
+	}
+
+	private void OnTriggerExit2D(Collider2D collider) {
+		Ladder ladder = collider.GetComponent<Ladder>();
+		if (ladder == null) { return; }
+		if (ladder != currentLadder) { return; }
+		currentLadder = null;
 	}
 
 #if UNITY_EDITOR

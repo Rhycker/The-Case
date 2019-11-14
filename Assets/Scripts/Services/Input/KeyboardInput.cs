@@ -12,6 +12,18 @@ public class KeyboardInput : IInput {
 		}
 	}
 
+	public float Vertical() {
+		if (Input.GetKey(KeyCode.S)) {
+			return -1f;
+		}
+		else if (Input.GetKey(KeyCode.W)) {
+			return 1f;
+		}
+		else {
+			return 0f;
+		}
+	}
+
 	public bool InventoryButtonDown() {
 		return Input.GetKeyDown(KeyCode.UpArrow);
 	}
