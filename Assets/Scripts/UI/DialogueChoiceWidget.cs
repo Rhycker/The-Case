@@ -13,7 +13,6 @@ public class DialogueChoiceWidget : MonoBehaviour {
 	public delegate void ReturnCommentText(string commentText);
 
 	public void Initialize(string commentText, Dictionary<string, object> extraVars) {
-		gameObject.SetActive(true);
 		text = GetComponent<TMP_Text>();
 		UpdateHighlight(false);
 		

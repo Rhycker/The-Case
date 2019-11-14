@@ -154,12 +154,13 @@ public class DialogueUI : MonoBehaviour {
 			bool useCustomNodeSprite = nodeData.sprite != null;
 			playerImage.sprite = useCustomNodeSprite ? nodeData.sprite : VD.assigned.defaultPlayerSprite;
 
-			for (int i = 0; i < nodeData.comments.Length; i++) {
-				DialogueChoiceWidget newChoiceWidget = Instantiate(playerChoiceWidgetTemplate, playerChoiceWidgetTemplate.transform.position, Quaternion.identity, playerChoiceWidgetTemplate.transform.parent);
-				newChoiceWidget.Initialize(nodeData.comments[i], nodeData.extraVars);
-				currentChoiceWidgets.Add(newChoiceWidget);
-			}
 			if (nodeData.comments.Length > 1) {
+				for (int i = 0; i < nodeData.comments.Length; i++) {
+					DialogueChoiceWidget newChoiceWidget = Instantiate(playerChoiceWidgetTemplate, playerChoiceWidgetTemplate.transform.position, Quaternion.identity, playerChoiceWidgetTemplate.transform.parent);
+					newChoiceWidget.gameObject.SetActive(true);
+					newChoiceWidget.Initialize(nodeData.comments[i], nodeData.extraVars);
+					currentChoiceWidgets.Add(newChoiceWidget);
+				}
 				UpdateChoiceVisuals(nodeData.commentIndex);
 			}
 			else {
