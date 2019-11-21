@@ -5,7 +5,7 @@ public class PickableItem : InteractableObject {
 	[AssetDropdown("Items", typeof(Item))][SerializeField] private Item item;
 
 	public override void Interact() {
-		InventoryPanel.Instance.AddItemWidget(item);
+		Inventory.Instance.AddItem(item);
 		Destroy(gameObject);
 	}
 	

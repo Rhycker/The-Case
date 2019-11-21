@@ -5,6 +5,8 @@ public class ItemInteractionPopup : MonoBehaviour {
 	[SerializeField] private GameObject useButton;
 	[SerializeField] private GameObject wearButton;
 
+	private InventoryPanel inventoryPanel;
+
 	private RectTransform rectTransform;
 	private Vector2 localPosition;
 
@@ -37,7 +39,7 @@ public class ItemInteractionPopup : MonoBehaviour {
 	}
 
 	public void Button_Combine() {
-		InventoryPanel.Instance.StartCombining();
+		inventoryPanel.StartCombining();
 	}
 
 	public void Button_Examine() {
@@ -46,6 +48,7 @@ public class ItemInteractionPopup : MonoBehaviour {
 
 	private void Awake() {
 		rectTransform = GetComponent<RectTransform>();
+		inventoryPanel = GetComponentInParent<InventoryPanel>();
 		localPosition = rectTransform.anchoredPosition;
 		gameObject.SetActive(false);
 	}

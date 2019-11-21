@@ -2,20 +2,21 @@
 
 public class InventoryPanel : MonoBehaviour {
 
-	public static InventoryPanel Instance;
-
 	[SerializeField] private ItemWidget itemWidgetTemplate;
 	[SerializeField] private ItemInteractionPopup interactionPopup;
 
 	private ItemWidget selectedItemWidget;
 	private bool isCombining;
 
-	public void Activate(bool active) {
-		gameObject.SetActive(active);
-		if (!active) {
+	public void Toggle() {
+		if (gameObject.activeInHierarchy) {
+			gameObject.SetActive(false);
 			isCombining = false;
 			selectedItemWidget = null;
 			interactionPopup.Deactivate();
+		}
+		else {
+			gameObject.SetActive(true);
 		}
 	}
 
@@ -39,39 +40,23 @@ public class InventoryPanel : MonoBehaviour {
 			interactionPopup.Activate(itemWidget);
 		}
 		else {
-			Item combinedItem = selectedItemWidget.Item.Combine(itemWidget.Item);
-			if(combinedItem != null) {
-				isCombining = false;
+			isCombining = false;
+			bool combiningSucceeded = Inventory.Instance.CombineItems(selectedItemWidget.Item, itemWidget.Item);
+			if(combiningSucceeded) {
 				Destroy(selectedItemWidget.gameObject);
-				Destroy(itemWidget.gameObject);
-				selectedItemWidget = AddItemWidget(combinedItem);
-				CoroutineHelper.WaitOneFrame(() => {
-					interactionPopup.Activate(selectedItemWidget);
-				});
+				Destroy(itemWidget.gameObject);				
 			}
 			else {
-				isCombining = false;
 				selectedItemWidget = null;
 			}
 		}
 	}
 
-	public void Button_Close() {
-		Activate(false);
-	}
-
 	private void Start() {
 		itemWidgetTemplate.gameObject.SetActive(false);
-		Instance = this;
-		Activate(false);
-	}
-
-	private void Update() {
-		if (Input.GetKeyUp(KeyCode.Space)) {
-			Item[] allItems = Resources.LoadAll<Item>("Items");
-			Item item = allItems[Random.Range(0, allItems.Length)];
-			Debug.Log("Add random item: " + item.name);
-			AddItemWidget(item);
+		if (gameObject.activeInHierarchy) {
+			Toggle();
 		}
 	}
+
 }
