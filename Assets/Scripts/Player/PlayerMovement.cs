@@ -29,6 +29,7 @@ public class PlayerMovement : MonoBehaviour {
 	}
 
 	private void FixedUpdate() {
+		if (Inventory.Instance.IsShowing) { return; }
 		bool traverseLadder = TraverseLadder();
 		if (traverseLadder) { return; }
 		MoveHorizontal();

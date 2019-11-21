@@ -5,6 +5,8 @@ public class Inventory : MonoBehaviour {
 
 	public static Inventory Instance { get; private set; }
 
+	public bool IsShowing { get { return inventoryPanel.IsActive; } }
+
 	[SerializeField] private InventoryPanel inventoryPanel;
 
 	private List<Item> items;

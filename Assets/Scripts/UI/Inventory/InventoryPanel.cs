@@ -2,6 +2,7 @@
 
 public class InventoryPanel : MonoBehaviour {
 
+	public bool IsActive { get { return gameObject.activeInHierarchy; } }
 	public int MaxItemCount { get { return itemWidgets.Length; } }
 	[SerializeField] private ItemInteractionPopup interactionPopup;
 
