@@ -2,9 +2,11 @@
 
 public class InventoryPanel : MonoBehaviour {
 
-	[SerializeField] private ItemWidget itemWidgetTemplate;
+	public int MaxItemCount { get { return itemWidgets.Length; } }
 	[SerializeField] private ItemInteractionPopup interactionPopup;
 
+	private ItemWidget[] itemWidgets;
+	private int itemCount;
 	private ItemWidget selectedItemWidget;
 	private bool isCombining;
 
@@ -16,16 +18,17 @@ public class InventoryPanel : MonoBehaviour {
 			interactionPopup.Deactivate();
 		}
 		else {
+			selectedItemWidget = itemWidgets[0];
 			gameObject.SetActive(true);
 		}
 	}
 
-	public ItemWidget AddItemWidget(Item item) {
-		ItemWidget newItemWidget = Instantiate(itemWidgetTemplate, itemWidgetTemplate.transform.parent);
-		newItemWidget.Initialize(this, item);
-		newItemWidget.gameObject.SetActive(true);
+	public void AddItemWidget(Item item) {
+		ItemWidget nextItemWidget = itemWidgets[itemCount];
+		nextItemWidget.BindItem(item);
+		selectedItemWidget = itemWidgets[0];
+		itemCount++;
 		interactionPopup.transform.SetAsLastSibling();
-		return newItemWidget;
 	}
 
 	public void StartCombining() {
@@ -34,17 +37,30 @@ public class InventoryPanel : MonoBehaviour {
 	}
 
 	public void InteractItemWidget(ItemWidget itemWidget) {
-		if (selectedItemWidget == itemWidget) { return; }
+		if (itemWidget.Item == null) { return; }
+		if (selectedItemWidget == itemWidget) {
+			if (interactionPopup.gameObject.activeInHierarchy) {
+				interactionPopup.Deactivate();
+			}
+			else {
+				interactionPopup.Activate(itemWidget);
+			}
+			return;
+		}
+
 		if (!isCombining) {
 			selectedItemWidget = itemWidget;
 			interactionPopup.Activate(itemWidget);
 		}
 		else {
 			isCombining = false;
-			bool combiningSucceeded = Inventory.Instance.CombineItems(selectedItemWidget.Item, itemWidget.Item);
-			if(combiningSucceeded) {
-				Destroy(selectedItemWidget.gameObject);
-				Destroy(itemWidget.gameObject);				
+			Item itemA = selectedItemWidget.Item;
+			Item itemB = itemWidget.Item;
+			Item combinedItem = itemA.Combine(itemB);
+			if(combinedItem != null) {
+				selectedItemWidget.Clear();
+				itemWidget.Clear();
+				Inventory.Instance.CombineItems(itemA, itemB, combinedItem);
 			}
 			else {
 				selectedItemWidget = null;
@@ -52,10 +68,24 @@ public class InventoryPanel : MonoBehaviour {
 		}
 	}
 
-	private void Start() {
-		itemWidgetTemplate.gameObject.SetActive(false);
+	public void Button_InteractItemWidget(ItemWidget itemWidget) {
+		InteractItemWidget(itemWidget);
+	}
+
+	private void Awake() {
+		itemWidgets = GetComponentsInChildren<ItemWidget>();
+		foreach(ItemWidget itemWidget in itemWidgets) {
+			itemWidget.Initialize();
+		}
+		interactionPopup.Initialize(this);
 		if (gameObject.activeInHierarchy) {
 			Toggle();
+		}
+	}
+	
+	private void Update() {
+		if (GameInput.Instance.Service.InteractButtonDown()) {
+			InteractItemWidget(selectedItemWidget);
 		}
 	}
 

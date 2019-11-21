@@ -5,12 +5,20 @@ public class ItemInteractionPopup : MonoBehaviour {
 	[SerializeField] private GameObject useButton;
 	[SerializeField] private GameObject wearButton;
 
+	private bool isInitialized;
 	private InventoryPanel inventoryPanel;
 
 	private RectTransform rectTransform;
 	private Vector2 localPosition;
 
 	private Item item;
+
+	public void Initialize(InventoryPanel inventoryPanel) {
+		this.inventoryPanel = inventoryPanel;
+		rectTransform = GetComponent<RectTransform>();
+		localPosition = rectTransform.anchoredPosition;
+		gameObject.SetActive(false);
+	}
 
 	public void Activate(ItemWidget itemWidget) {
 		item = itemWidget.Item;
@@ -44,13 +52,6 @@ public class ItemInteractionPopup : MonoBehaviour {
 
 	public void Button_Examine() {
 		Debug.Log("Examine: " + item.ExaminationText);
-	}
-
-	private void Awake() {
-		rectTransform = GetComponent<RectTransform>();
-		inventoryPanel = GetComponentInParent<InventoryPanel>();
-		localPosition = rectTransform.anchoredPosition;
-		gameObject.SetActive(false);
 	}
 
 }

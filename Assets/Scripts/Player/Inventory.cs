@@ -9,19 +9,17 @@ public class Inventory : MonoBehaviour {
 
 	private List<Item> items;
 
-	public void AddItem(Item item) {
+	public bool AddItem(Item item) {
+		if(items.Count >= inventoryPanel.MaxItemCount) { return false; }
 		items.Add(item);
 		inventoryPanel.AddItemWidget(item);
+		return true;
 	}
 
-	public bool CombineItems(Item itemA, Item itemB) {
-		Item combinedItem = itemA.Combine(itemB);
-		if (combinedItem == null) { return false; }
-
+	public void CombineItems(Item itemA, Item itemB, Item combinedItem) {
 		items.Remove(itemA);
 		items.Remove(itemB);
 		AddItem(combinedItem);
-		return true;
 	}
 
 	private void Awake() {

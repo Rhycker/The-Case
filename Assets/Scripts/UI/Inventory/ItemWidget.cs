@@ -7,16 +7,21 @@ public class ItemWidget : MonoBehaviour {
 
 	[SerializeField] private Image iconImage;
 
-	private InventoryPanel inventoryPanel;
+	public void Initialize() {
+		iconImage.sprite = null;
+		iconImage.enabled = false;
+	}
 
-	public void Initialize(InventoryPanel inventoryPanel, Item item) {
-		this.inventoryPanel = inventoryPanel;
+	public void BindItem(Item item) {
 		Item = item;
 		iconImage.sprite = item.Icon;
+		iconImage.enabled = true;
 	}
 
-	public void Button_Item() {
-		inventoryPanel.InteractItemWidget(this);
+	public void Clear() {
+		Item = null;
+		iconImage.sprite = null;
+		iconImage.enabled = false;
 	}
-
+	
 }
