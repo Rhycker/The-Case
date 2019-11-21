@@ -1,4 +1,5 @@
 ﻿using UnityEditor;
+using UnityEngine;
 
 [CustomEditor(typeof(CanvasUI), true)]
 public class CanvasUIEditor : Editor {
@@ -17,9 +18,15 @@ public class CanvasUIEditor : Editor {
 			return;
 		}
 
-		if(Selection.activeTransform.root != targetScript.transform) {
-			targetScript.ShowCanvas(false);
+		Transform parent = Selection.activeTransform.parent;
+		while(parent != null) {
+			if(parent == targetScript.transform) {
+				return;
+			}
+			parent = parent.parent;
 		}
+
+		targetScript.ShowCanvas(false);
 	}
 
 }
