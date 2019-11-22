@@ -6,10 +6,11 @@ public class Inventory : MonoBehaviour {
 	public static Inventory Instance { get; private set; }
 
 	public bool IsShowing { get { return inventoryPanel.IsActive; } }
+	public int ItemCount { get { return items.Count; } }
 
 	[SerializeField] private InventoryPanel inventoryPanel;
 
-	private List<Item> items;
+	private List<Item> items;// This should be bound to the inventory panel items
 
 	public bool AddItem(Item item) {
 		if(items.Count >= inventoryPanel.MaxItemCount) { return false; }
