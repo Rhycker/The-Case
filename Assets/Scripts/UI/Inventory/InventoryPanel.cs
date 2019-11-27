@@ -54,8 +54,13 @@ public class InventoryPanel : MonoBehaviour {
 
 		ItemWidget nextItemWidget = itemWidgets[nextWidgetIndex];
 		nextItemWidget.BindItem(item);
+
+		if (itemCount > 0) {
+			selectedItemWidget.ShowSelection(false);
+		}
 		widgetsWithItem.Insert(0, nextItemWidget);
-		
+		selectedItemWidget.ShowSelection(true);
+
 		interactionPopup.transform.SetAsLastSibling();
 	}
 
@@ -119,6 +124,7 @@ public class InventoryPanel : MonoBehaviour {
 	}
 	
 	private void Update() {
+		if (itemCount == 0) { return; }
 		if (GameInput.Instance.Service.InteractButtonDown()) {
 			InteractItemWidget(selectedItemWidget);
 		}
@@ -169,6 +175,8 @@ public class InventoryPanel : MonoBehaviour {
 
 		ItemWidget selectionTargetWidget = widgetsWithItem.GetAtIndex(targetIndex, true);
 		Debug.Log("Select item widget: " + targetIndex + ", for item shift: " + indexShift);
+		Debug.Log("First widget: " + selectedItemWidget.name, selectedItemWidget);
+		Debug.Log("Target widget: " + selectionTargetWidget.name, selectionTargetWidget);
 		OrganizeItemWidgets(selectionTargetWidget);
 	}
 

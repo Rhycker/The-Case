@@ -2531,6 +2531,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   iconImage: {fileID: 1693034101}
+  selectionContainer: {fileID: 578600284}
+  warningContainer: {fileID: 634236738}
 --- !u!1 &725894597
 GameObject:
   m_ObjectHideFlags: 0
@@ -2712,6 +2714,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   iconImage: {fileID: 1646660076}
+  selectionContainer: {fileID: 616293115}
+  warningContainer: {fileID: 1709261749}
 --- !u!1 &831104831
 GameObject:
   m_ObjectHideFlags: 0
@@ -2885,6 +2889,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   iconImage: {fileID: 499516370}
+  selectionContainer: {fileID: 725894597}
+  warningContainer: {fileID: 1088740147}
 --- !u!1 &881188073
 GameObject:
   m_ObjectHideFlags: 0
@@ -5232,6 +5238,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   iconImage: {fileID: 692207558}
+  selectionContainer: {fileID: 2095194185}
+  warningContainer: {fileID: 2000015434}
 --- !u!1 &1693034099
 GameObject:
   m_ObjectHideFlags: 0
@@ -5902,6 +5910,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   iconImage: {fileID: 655737362}
+  selectionContainer: {fileID: 2018411708}
+  warningContainer: {fileID: 1695898772}
 --- !u!1 &1967483319
 GameObject:
   m_ObjectHideFlags: 0
