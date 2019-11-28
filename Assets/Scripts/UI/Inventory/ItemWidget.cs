@@ -7,7 +7,6 @@ public class ItemWidget : MonoBehaviour {
 	public UniqueWidgetItem UniqueItem { get; private set; }
 
 	[SerializeField] private Image iconImage;
-	[SerializeField] private GameObject selectionContainer;
 	[SerializeField] private GameObject warningContainer;
 	[SerializeField] private float showWarningDuration;
 
@@ -16,10 +15,6 @@ public class ItemWidget : MonoBehaviour {
 	public void Initialize() {
 		iconImage.sprite = null;
 		iconImage.enabled = false;
-	}
-
-	public void ShowSelection(bool show) {
-		selectionContainer.SetActive(show);
 	}
 
 	public void ShowWarning() {
@@ -40,7 +35,6 @@ public class ItemWidget : MonoBehaviour {
 	}
 
 	private void Awake() {
-		ShowSelection(false);
 		warningContainer.SetActive(false);
 	}
 

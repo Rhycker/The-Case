@@ -8,13 +8,17 @@ public class InventoryPanel : MonoBehaviour {
 	public int MaxItemCount { get; private set; }
 
 	[SerializeField] private ItemInteractionPopup interactionPopup;
+	[SerializeField] private GameObject selectionIndicatorContainer;
+	[SerializeField] private GameObject combineIndicatorContainer;
 	[SerializeField] private float minSelectionSwitchTime;
 
 	private int itemCount { get { return sortedItems.Count; } }
 	private List<ItemWidget> itemWidgets;
-	public List<UniqueWidgetItem> sortedItems;//QQ
+	private List<UniqueWidgetItem> sortedItems;
 	private ItemWidget topItemWidget { get { return itemWidgets[0]; } }
-	private bool isCombining;
+
+	private UniqueWidgetItem selectedCombineItem;
+	private bool isCombining { get { return selectedCombineItem != null; } }
 
 	private bool selectLeftDown;
 	private bool selectRightDown;
@@ -23,7 +27,7 @@ public class InventoryPanel : MonoBehaviour {
 	public void Toggle() {
 		if (IsActive) {
 			gameObject.SetActive(false);
-			isCombining = false;
+			UpdateInteractionCombineState();
 			interactionPopup.Deactivate();
 		}
 		else {
@@ -35,16 +39,19 @@ public class InventoryPanel : MonoBehaviour {
 		UniqueWidgetItem uniqueItem = new UniqueWidgetItem(item);
 		sortedItems.Insert(0, uniqueItem);
 		UpdateItemWidgets();
+		UpdateInteractionCombineState();
 	}
 
 	public void StartCombining() {
-		isCombining = true;
 		interactionPopup.Deactivate();
+		UpdateInteractionCombineState(topItemWidget.UniqueItem);
 	}
 
 	public void InteractItemWidget(ItemWidget itemWidget) {
 		if (itemWidget.Item == null) { return; }
-		if (topItemWidget == itemWidget) {
+		if (selectedCombineItem == itemWidget.UniqueItem) {
+			UpdateInteractionCombineState(null);
+
 			if (interactionPopup.gameObject.activeInHierarchy) {
 				interactionPopup.Deactivate();
 			}
@@ -55,21 +62,21 @@ public class InventoryPanel : MonoBehaviour {
 		}
 
 		if (!isCombining) {
-			isCombining = true;
 			OrganizeItemWidgets(itemWidget.UniqueItem);
 			interactionPopup.Activate(topItemWidget);
 		}
 		else {
-			isCombining = false;
-			Item itemA = topItemWidget.Item;
+			Item itemA = selectedCombineItem.Item;
 			Item itemB = itemWidget.Item;
 			Item combinedItem = itemA.Combine(itemB);
 			if(combinedItem != null) {
-				sortedItems.Remove(topItemWidget.UniqueItem);
+				sortedItems.Remove(selectedCombineItem);
 				sortedItems.Remove(itemWidget.UniqueItem);
 				AddItemWidget(combinedItem);
 			}
-			else {
+
+			UpdateInteractionCombineState();
+			if(combinedItem == null) {
 				itemWidget.ShowWarning();
 			}
 		}
@@ -95,6 +102,9 @@ public class InventoryPanel : MonoBehaviour {
 		interactionPopup.Initialize(this);
 		interactionPopup.transform.SetAsLastSibling();
 
+		selectionIndicatorContainer.SetActive(false);
+		combineIndicatorContainer.SetActive(false);
+
 		if (IsActive) {
 			Toggle();
 		}
@@ -117,6 +127,12 @@ public class InventoryPanel : MonoBehaviour {
 			selectLeftDown = false;
 			selectRightDown = false;
 		}
+	}
+
+	private void UpdateInteractionCombineState(UniqueWidgetItem item = null) {
+		selectedCombineItem = item;
+		selectionIndicatorContainer.SetActive(!isCombining && itemCount > 0);
+		combineIndicatorContainer.SetActive(isCombining);
 	}
 
 	private void UpdateSelection(bool isRight) {
@@ -179,10 +195,9 @@ public class InventoryPanel : MonoBehaviour {
 
 		if (itemCount >= 1) {
 			itemWidgets[0].BindItem(sortedItems[0]);
-			topItemWidget.ShowSelection(true);
 		}
 		else {
-			topItemWidget.ShowSelection(false);
+			selectionIndicatorContainer.SetActive(false);
 		}
 		if (itemCount >= 2) {
 			itemWidgets[1].BindItem(sortedItems[1]);
