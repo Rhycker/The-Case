@@ -1,19 +1,24 @@
 ﻿using UnityEngine;
 
 public class Ladder : MonoBehaviour {
+	
+	public float BottomYPosition { get { return climbingStartBottom.position.y; } }
 
 	[SerializeField] private Transform climbingStartTop;
 	[SerializeField] private Transform climbingStartBottom;
 	[SerializeField] private Transform climbingDestinationTop;
+	[SerializeField] private int steps;
 
-	public Vector3 GetStartPosition(Vector3 position) {
+	public Vector3 GetStartPosition(Vector3 position, out int startStep) {
 		float distanceToTop = Mathf.Abs(position.y - climbingStartTop.position.y);
 		float distanceToBottom = Mathf.Abs(position.y - climbingStartBottom.position.y);
 
 		if (distanceToBottom > distanceToTop) {
+			startStep = steps + 1;
 			return climbingStartTop.position;
 		}
 		else {
+			startStep = 0;
 			return climbingStartBottom.position;
 		}
 	}

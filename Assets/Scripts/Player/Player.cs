@@ -17,9 +17,16 @@ public class Player : MonoBehaviour {
 
 	private void FixedUpdate() {
 		if (Inventory.Instance.IsShowing) { return; }
-		bool traverseLadder = ladderClimbing.TraverseLadder();
-		if (traverseLadder) { return; }
-		movement.MoveHorizontal();
+		float verticalInput = GameInput.Instance.Service.Vertical();
+		if (!ladderClimbing.IsClimbingLadder) {
+			ladderClimbing.StartClimbingLadder(verticalInput);
+		}
+		if (ladderClimbing.IsClimbingLadder) {
+			ladderClimbing.TraverseLadder(verticalInput);
+		}
+		else {
+			movement.MoveHorizontal();
+		}
 	}
 
 	private void OnRoomEntered(Room nextRoom) {

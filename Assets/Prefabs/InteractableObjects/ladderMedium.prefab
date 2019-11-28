@@ -185,6 +185,7 @@ MonoBehaviour:
   climbingStartTop: {fileID: 2889363171740355917}
   climbingStartBottom: {fileID: 2889363172014357312}
   climbingDestinationTop: {fileID: 2889363172774424204}
+  steps: 8
 --- !u!1 &2889363172774424211
 GameObject:
   m_ObjectHideFlags: 0
