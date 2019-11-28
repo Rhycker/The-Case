@@ -3,13 +3,13 @@
 [SelectionBase]
 public class PlayerMovement : MonoBehaviour {
 
-	[SerializeField] private float movementForce = default;
-	[SerializeField] private float ladderClimbSpeed = default;
-	[SerializeField] private SpriteRenderer visuals = default;
-	[SerializeField] private float floorYOffset = default;
-	[SerializeField] private LayerMask obstacleLayerMask = default;	
-	[SerializeField] private Vector2 colliderCheckBoxSize = default;
-	[SerializeField] private float minLadderClimbDistance = default;
+	[SerializeField] private float movementForce;
+	[SerializeField] private float ladderClimbSpeed;
+	[SerializeField] private Animator animator;
+	[SerializeField] private float floorYOffset;
+	[SerializeField] private LayerMask obstacleLayerMask;	
+	[SerializeField] private Vector2 colliderCheckBoxSize;
+	[SerializeField] private float minLadderClimbDistance;
 
 	private new Rigidbody2D rigidbody;
 	private bool flipXViewRight;
@@ -19,7 +19,6 @@ public class PlayerMovement : MonoBehaviour {
 
 	private void Awake() {
 		rigidbody = GetComponent<Rigidbody2D>();
-		flipXViewRight = visuals.flipX;
 		RoomNavigation.Instance.OnRoomEntered += OnRoomEntered;
 	}
 
@@ -33,6 +32,10 @@ public class PlayerMovement : MonoBehaviour {
 		bool traverseLadder = TraverseLadder();
 		if (traverseLadder) { return; }
 		MoveHorizontal();
+	}
+
+	private void Update() {
+		animator.SetFloat("horizontalMovement", rigidbody.velocity.x);
 	}
 
 	private bool TraverseLadder() {
@@ -82,14 +85,6 @@ public class PlayerMovement : MonoBehaviour {
 	private void MoveHorizontal() {
 		float horizontalInput = GameInput.Instance.Service.Horizontal();
 		if (horizontalInput == 0) { return; }
-
-		bool lookLeft = horizontalInput < 0f;
-		if (lookLeft) {
-			visuals.flipX = !flipXViewRight;
-		}
-		else {
-			visuals.flipX = flipXViewRight;
-		}
 
 		Vector2 force = new Vector2(horizontalInput * movementForce, 0f);
 		rigidbody.AddForce(force);
