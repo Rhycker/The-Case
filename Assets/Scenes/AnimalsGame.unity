@@ -771,7 +771,7 @@ PrefabInstance:
     - target: {fileID: 6243791624180943286, guid: 48dc597b3790de148b5ee0b1582b4661,
         type: 3}
       propertyPath: stepHeight
-      value: 0.25
+      value: 0.2222222
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 48dc597b3790de148b5ee0b1582b4661, type: 3}
@@ -4328,11 +4328,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2889363172600480068, guid: 2fab91c9bc0b96e49a2fb5dbb72c1491,
-        type: 3}
-      propertyPath: steps
-      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2fab91c9bc0b96e49a2fb5dbb72c1491, type: 3}

@@ -18,14 +18,14 @@ public class Player : MonoBehaviour {
 	private void FixedUpdate() {
 		if (Inventory.Instance.IsShowing) { return; }
 		float verticalInput = GameInput.Instance.Service.Vertical();
-		if (!ladderClimbing.IsClimbingLadder) {
-			ladderClimbing.StartClimbingLadder(verticalInput);
-		}
 		if (ladderClimbing.IsClimbingLadder) {
 			ladderClimbing.TraverseLadder(verticalInput);
 		}
-		else {
-			movement.MoveHorizontal();
+		else { 
+			if (ladderClimbing.StartClimbingLadder(verticalInput)) { return; }
+			else {
+				movement.MoveHorizontal();
+			}
 		}
 	}
 
