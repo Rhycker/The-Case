@@ -3,11 +3,15 @@ using UnityEngine.UI;
 
 public class ItemWidget : MonoBehaviour {
 
-	public Item Item { get; private set; }
+	public Item Item { get { return UniqueItem.Item; } }
+	public UniqueWidgetItem UniqueItem { get; private set; }
 
 	[SerializeField] private Image iconImage;
 	[SerializeField] private GameObject selectionContainer;
 	[SerializeField] private GameObject warningContainer;
+	[SerializeField] private float showWarningDuration;
+
+	private float remainingShowWarningDuration;
 
 	public void Initialize() {
 		iconImage.sprite = null;
@@ -18,25 +22,34 @@ public class ItemWidget : MonoBehaviour {
 		selectionContainer.SetActive(show);
 	}
 
-	public void ShowWarning(bool show) {
-		warningContainer.SetActive(show);
+	public void ShowWarning() {
+		warningContainer.SetActive(true);
+		remainingShowWarningDuration = showWarningDuration;
 	}
 
 	public void BindItem(Item item) {
-		Item = item;
+		UniqueItem = new UniqueWidgetItem(item);
 		iconImage.sprite = item.Icon;
 		iconImage.enabled = true;
 	}
 
 	public void Clear() {
-		Item = null;
+		UniqueItem = null;
 		iconImage.sprite = null;
 		iconImage.enabled = false;
 	}
 
 	private void Awake() {
 		ShowSelection(false);
-		ShowWarning(false);
+		warningContainer.SetActive(false);
+	}
+
+	private void Update() {
+		if(remainingShowWarningDuration <= 0f) { return; }
+		remainingShowWarningDuration -= Time.deltaTime;
+		if(remainingShowWarningDuration <= 0f) {
+			warningContainer.SetActive(false);
+		}
 	}
 
 }

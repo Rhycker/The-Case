@@ -12,11 +12,9 @@ public class Inventory : MonoBehaviour {
 
 	private List<Item> items;// This should be bound to the inventory panel items
 
-	public bool AddItem(Item item) {
-		if(items.Count >= inventoryPanel.MaxItemCount) { return false; }
+	public void AddItem(Item item) {
 		items.Add(item);
 		inventoryPanel.AddItemWidget(item);
-		return true;
 	}
 
 	public void CombineItems(Item itemA, Item itemB, Item combinedItem) {
