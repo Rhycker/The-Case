@@ -31,11 +31,9 @@ public class InventoryPanel : MonoBehaviour {
 		}
 	}
 
-	public void AddItemWidget(Item item, bool isNewItem = true) {
-		if (isNewItem) {
-			UniqueWidgetItem uniqueItem = new UniqueWidgetItem(item);
-			sortedItems.Insert(0, uniqueItem);
-		}
+	public void AddItemWidget(Item item) {
+		UniqueWidgetItem uniqueItem = new UniqueWidgetItem(item);
+		sortedItems.Insert(0, uniqueItem);
 		UpdateItemWidgets();
 	}
 
@@ -69,7 +67,7 @@ public class InventoryPanel : MonoBehaviour {
 			if(combinedItem != null) {
 				sortedItems.Remove(topItemWidget.UniqueItem);
 				sortedItems.Remove(itemWidget.UniqueItem);
-				Inventory.Instance.CombineItems(itemA, itemB, combinedItem);
+				AddItemWidget(combinedItem);
 			}
 			else {
 				itemWidget.ShowWarning();
