@@ -36,7 +36,6 @@ public class Inventory : MonoBehaviour {
 		if (Input.GetKeyUp(KeyCode.Space)) {
 			Item[] allItems = Resources.LoadAll<Item>("Items");
 			Item item = allItems[Random.Range(0, allItems.Length)];
-			Debug.Log("Add random item: " + item.name);
 			AddItem(item);
 		}
 	}

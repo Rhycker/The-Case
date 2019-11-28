@@ -13,7 +13,7 @@ public class InventoryPanel : MonoBehaviour {
 	private int itemCount { get { return sortedItems.Count; } }
 	private List<ItemWidget> itemWidgets;
 	public List<UniqueWidgetItem> sortedItems;//QQ
-	private ItemWidget firstItemWidget { get { return itemWidgets[0]; } }
+	private ItemWidget topItemWidget { get { return itemWidgets[0]; } }
 	private bool isCombining;
 
 	private bool selectLeftDown;
@@ -46,7 +46,7 @@ public class InventoryPanel : MonoBehaviour {
 
 	public void InteractItemWidget(ItemWidget itemWidget) {
 		if (itemWidget.Item == null) { return; }
-		if (firstItemWidget == itemWidget) {
+		if (topItemWidget == itemWidget) {
 			if (interactionPopup.gameObject.activeInHierarchy) {
 				interactionPopup.Deactivate();
 			}
@@ -57,17 +57,18 @@ public class InventoryPanel : MonoBehaviour {
 		}
 
 		if (!isCombining) {
-			//OrganizeItemWidgets(itemWidget);
-			interactionPopup.Activate(firstItemWidget);
+			isCombining = true;
+			OrganizeItemWidgets(itemWidget.UniqueItem);
+			interactionPopup.Activate(topItemWidget);
 		}
 		else {
 			isCombining = false;
-			Item itemA = firstItemWidget.Item;
+			Item itemA = topItemWidget.Item;
 			Item itemB = itemWidget.Item;
 			Item combinedItem = itemA.Combine(itemB);
 			if(combinedItem != null) {
-				firstItemWidget.Clear();
-				itemWidget.Clear();
+				sortedItems.Remove(topItemWidget.UniqueItem);
+				sortedItems.Remove(itemWidget.UniqueItem);
 				Inventory.Instance.CombineItems(itemA, itemB, combinedItem);
 			}
 			else {
@@ -77,13 +78,12 @@ public class InventoryPanel : MonoBehaviour {
 	}
 
 	public void Button_InteractItemWidget(ItemWidget itemWidget) {
-		//RemoveItem(itemWidget);
-		//InteractItemWidget(itemWidget);
+		InteractItemWidget(itemWidget);
 	}
+
 	private void RemoveItem(ItemWidget itemWidget) {
-		itemWidget.Clear();
-		//sortedItems.Remove(itemWidget.Item);
-		//OrganizeItemWidgets();
+		sortedItems.Remove(itemWidget.UniqueItem);
+		UpdateItemWidgets();
 	}
 
 	private void Awake() {
@@ -105,7 +105,7 @@ public class InventoryPanel : MonoBehaviour {
 	private void Update() {
 		if (itemCount == 0) { return; }
 		if (GameInput.Instance.Service.InteractButtonDown()) {
-			InteractItemWidget(firstItemWidget);
+			InteractItemWidget(topItemWidget);
 		}
 
 		float horizontalInput = GameInput.Instance.Service.Horizontal();
@@ -153,12 +153,12 @@ public class InventoryPanel : MonoBehaviour {
 		}
 
 		UniqueWidgetItem targetItem = sortedItems.GetAtIndex(targetIndex, true);
-		targetIndex = sortedItems.IndexOf(targetItem);
-		OrganizeItemWidgets(targetIndex);
+		OrganizeItemWidgets(targetItem);
 	}
 	
-	private void OrganizeItemWidgets(int sortedItemTargetIndex) {
+	private void OrganizeItemWidgets(UniqueWidgetItem firstWidgetItem) {
 		if (itemCount < 2) { return; }
+		int sortedItemTargetIndex = sortedItems.IndexOf(firstWidgetItem);
 
 		// Sort widgets so firstWidget is actually the first widget of the list
 		List<UniqueWidgetItem> newSortedItems = new List<UniqueWidgetItem>();
@@ -180,18 +180,18 @@ public class InventoryPanel : MonoBehaviour {
 		}
 
 		if (itemCount >= 1) {
-			itemWidgets[0].BindItem(sortedItems[0].Item);
-			firstItemWidget.ShowSelection(true);
+			itemWidgets[0].BindItem(sortedItems[0]);
+			topItemWidget.ShowSelection(true);
 		}
 		else {
-			firstItemWidget.ShowSelection(false);
+			topItemWidget.ShowSelection(false);
 		}
 		if (itemCount >= 2) {
-			itemWidgets[1].BindItem(sortedItems[1].Item);
+			itemWidgets[1].BindItem(sortedItems[1]);
 		}
 		if (itemCount >= 3) {
 			int lastItemIndex = itemCount - 1;
-			itemWidgets[2].BindItem(sortedItems[lastItemIndex].Item);
+			itemWidgets[2].BindItem(sortedItems[lastItemIndex]);
 		}
 	}
 

@@ -27,9 +27,9 @@ public class ItemWidget : MonoBehaviour {
 		remainingShowWarningDuration = showWarningDuration;
 	}
 
-	public void BindItem(Item item) {
-		UniqueItem = new UniqueWidgetItem(item);
-		iconImage.sprite = item.Icon;
+	public void BindItem(UniqueWidgetItem item) {
+		UniqueItem = item;
+		iconImage.sprite = item.Item.Icon;
 		iconImage.enabled = true;
 	}
 
