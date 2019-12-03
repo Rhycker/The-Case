@@ -773,6 +773,23 @@ PrefabInstance:
       propertyPath: stepHeight
       value: 0.2222222
       objectReference: {fileID: 0}
+    - target: {fileID: 8598249495887286936, guid: 48dc597b3790de148b5ee0b1582b4661,
+        type: 3}
+      propertyPath: movementForce
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 1151169382, guid: 48dc597b3790de148b5ee0b1582b4661, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1151169384, guid: 48dc597b3790de148b5ee0b1582b4661, type: 3}
+      propertyPath: m_RefResolutionX
+      value: 640
+      objectReference: {fileID: 0}
+    - target: {fileID: 1151169384, guid: 48dc597b3790de148b5ee0b1582b4661, type: 3}
+      propertyPath: m_RefResolutionY
+      value: 360
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 48dc597b3790de148b5ee0b1582b4661, type: 3}
 --- !u!1 &382357393
