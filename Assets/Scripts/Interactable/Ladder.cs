@@ -26,11 +26,11 @@ public class Ladder : MonoBehaviour {
 	public bool StopClimbing(Vector3 position, out Vector2 endPosition) {
 		endPosition = Vector2.zero;
 
-		if(position.y < climbingStartBottom.position.y) {
+		if(position.y <= climbingStartBottom.position.y) {
 			endPosition = climbingStartBottom.transform.position;
 			return true;
 		}
-		else if (position.y > climbingStartTop.position.y) {
+		else if (position.y >= climbingStartTop.position.y) {
 			endPosition = climbingDestinationTop.transform.position;
 			return true;
 		}
