@@ -30,8 +30,8 @@ public class Player : MonoBehaviour {
 	}
 
 	private void OnRoomEntered(Room nextRoom) {
-		Vector3 targetPosition = new Vector3(nextRoom.PlayerSpawnPositionX, nextRoom.OriginPosition.y, transform.position.z);
-		rigidbody.MovePosition(targetPosition);
+		transform.position = nextRoom.EntrancePosition;
+		Debug.DrawLine(nextRoom.EntrancePosition, transform.position, Color.red, 1f);
 	}
 
 }

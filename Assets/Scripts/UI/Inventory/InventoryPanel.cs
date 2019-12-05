@@ -1,14 +1,11 @@
-﻿using UnityEngine;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 public class InventoryPanel : MonoBehaviour {
 
 	public bool IsActive { get { return gameObject.activeInHierarchy; } }
 	public int MaxItemCount { get; private set; }
-
-	public delegate void ItemUsageDelegate(Item item);
-	public event ItemUsageDelegate OnItemUse;
 
 	[SerializeField] private ItemInteractionPopup interactionPopup;
 	[SerializeField] private GameObject selectionIndicatorContainer;
@@ -87,10 +84,6 @@ public class InventoryPanel : MonoBehaviour {
 
 	public void Button_InteractItemWidget(ItemWidget itemWidget) {
 		InteractItemWidget(itemWidget);
-	}
-
-	public void Button_Use(ItemWidget itemWidget) {
-		OnItemUse?.Invoke(itemWidget.Item);
 	}
 
 	public void RemoveItemWidget(Item item) {

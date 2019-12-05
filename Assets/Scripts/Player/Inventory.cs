@@ -8,7 +8,7 @@ public class Inventory : MonoBehaviour {
 	public bool IsShowing { get { return inventoryPanel.IsActive; } }
 
 	[SerializeField] private InventoryPanel inventoryPanel;
-
+	
 	private List<Item> items;
 
 	public bool ContainsItem(Item item) {
@@ -27,6 +27,7 @@ public class Inventory : MonoBehaviour {
 
 	private void Awake() {
 		Instance = this;
+		items = new List<Item>();
 	}
 
 	private void Update() {

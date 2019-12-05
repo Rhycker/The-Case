@@ -7,6 +7,7 @@ public class ItemInteractionPopup : MonoBehaviour {
 
 	private bool isInitialized;
 	private InventoryPanel inventoryPanel;
+	private PlayerInteractions interactionScript;
 
 	private RectTransform rectTransform;
 	private Vector2 localPosition;
@@ -15,6 +16,7 @@ public class ItemInteractionPopup : MonoBehaviour {
 
 	public void Initialize(InventoryPanel inventoryPanel) {
 		this.inventoryPanel = inventoryPanel;
+		interactionScript = inventoryPanel.GetComponentInParent<PlayerInteractions>();
 		rectTransform = GetComponent<RectTransform>();
 		localPosition = rectTransform.anchoredPosition;
 		gameObject.SetActive(false);
@@ -40,6 +42,8 @@ public class ItemInteractionPopup : MonoBehaviour {
 
 	public void Button_Use() {
 		Debug.Log("Use " + item.name);
+		inventoryPanel.Toggle();
+		interactionScript.UseItem(item);
 	}
 
 	public void Button_Wear() {

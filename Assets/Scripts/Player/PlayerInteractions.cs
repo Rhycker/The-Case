@@ -4,6 +4,11 @@ public class PlayerInteractions : MonoBehaviour {
 
 	private InteractableObject interactableObject;
 
+	public void UseItem(Item item) {
+		if(interactableObject == null) { return; }
+		interactableObject.UseItem(item);
+	}
+
 	private void Update() {
 		if (interactableObject == null) { return; }
 		if (DialogueUI.Instance.IsActive) { return; }
