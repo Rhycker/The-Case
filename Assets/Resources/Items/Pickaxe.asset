@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e1ddfbd1606b7fd4693a8855a7df7b72, type: 3}
-  m_Name: Flintstone
+  m_Name: Pickaxe
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300022, guid: 495af3b23d44dcb4cbc389510b4f6249, type: 3}
+  icon: {fileID: 21300006, guid: aa4437d8ba804054c889e40cfdafa4de, type: 3}
   itemUse: 0
-  examinationText: I might be able to make fire with this
+  examinationText: Might be useful for breaking stones
   firstIngredient: {fileID: 0}
   secondIngredient: {fileID: 0}
