@@ -4011,6 +4011,11 @@ PrefabInstance:
       propertyPath: steps
       value: 12
       objectReference: {fileID: 0}
+    - target: {fileID: 2889363172600480068, guid: 2fab91c9bc0b96e49a2fb5dbb72c1491,
+        type: 3}
+      propertyPath: topEndingStep
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2fab91c9bc0b96e49a2fb5dbb72c1491, type: 3}
 --- !u!4 &2032155850 stripped
@@ -4365,11 +4370,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2889363172600480068, guid: 2fab91c9bc0b96e49a2fb5dbb72c1491,
-        type: 3}
-      propertyPath: topEndingStep
-      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2fab91c9bc0b96e49a2fb5dbb72c1491, type: 3}
