@@ -783,6 +783,16 @@ PrefabInstance:
       propertyPath: climbTransitionAnimation
       value: 
       objectReference: {fileID: 7400000, guid: dda7f04984209174d8d0bb8d3a9b0174, type: 2}
+    - target: {fileID: 6243791624180943286, guid: 48dc597b3790de148b5ee0b1582b4661,
+        type: 3}
+      propertyPath: climbStartAnimation
+      value: 
+      objectReference: {fileID: 7400000, guid: dda7f04984209174d8d0bb8d3a9b0174, type: 2}
+    - target: {fileID: 6243791624180943286, guid: 48dc597b3790de148b5ee0b1582b4661,
+        type: 3}
+      propertyPath: climbStopAnimation
+      value: 
+      objectReference: {fileID: 7400000, guid: 4f6ffbc2a49c65a4bac0668315f5112d, type: 2}
     - target: {fileID: 8598249495887286936, guid: 48dc597b3790de148b5ee0b1582b4661,
         type: 3}
       propertyPath: movementForce
@@ -4355,6 +4365,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2889363172600480068, guid: 2fab91c9bc0b96e49a2fb5dbb72c1491,
+        type: 3}
+      propertyPath: topEndingStep
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2fab91c9bc0b96e49a2fb5dbb72c1491, type: 3}
