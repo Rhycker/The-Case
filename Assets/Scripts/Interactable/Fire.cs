@@ -13,8 +13,8 @@ public class Fire : InteractableObject {
 			Inventory.Instance.RemoveItem(item);
 			IsLit = true;
 			animator.enabled = true;
+			CanInteract = false;
 			ShowInteractIcon(false);
-			Destroy(this);
 		}
 	}
 

@@ -23,10 +23,7 @@ public class PlayerInteractions : MonoBehaviour {
 			interactableObject.ShowInteractIcon(false);
 		}
 		interactableObject = collider.GetComponent<InteractableObject>();
-		if(interactableObject == null) {
-			Debug.LogWarning("No interactable object on " + collider.name);
-			return;
-		}
+		if (!interactableObject.CanInteract) { return; }
 
 		interactableObject.ShowInteractIcon(true);
 	}
