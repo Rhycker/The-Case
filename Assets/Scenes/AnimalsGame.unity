@@ -527,34 +527,34 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 12.4375, y: -2}
-      - {x: -0.40625, y: -2}
-      - {x: -1.40625, y: -1.8125}
-      - {x: -9.59375, y: -1.8125}
-      - {x: -10.5625, y: -2}
-      - {x: -12.4375, y: -2}
-      - {x: -12.5, y: -2.0625}
-      - {x: -12.5, y: -5}
-      - {x: 12.5, y: -5}
-      - {x: 12.5, y: -2.0625}
-    - - {x: 3.5, y: -0.0625}
-      - {x: 3.5625, y: 0}
-      - {x: 11.4375, y: 0}
-      - {x: 11.5, y: -0.0625}
-      - {x: 11.5, y: -0.28125}
-      - {x: 3.5, y: -0.28125}
-    - - {x: -10.5, y: 1.71875}
-      - {x: -10.5, y: 1.9375}
-      - {x: -10.4375, y: 2}
-      - {x: 11.4375, y: 2}
-      - {x: 11.5, y: 1.9375}
-      - {x: 11.5, y: 1.71875}
-    - - {x: -5.5, y: 4.71875}
-      - {x: -5.5, y: 4.9375}
-      - {x: -5.4375, y: 5}
-      - {x: -0.5625, y: 5}
-      - {x: -0.5, y: 4.9375}
-      - {x: -0.5, y: 4.71875}
+    - - {x: 12.375, y: -3.5}
+      - {x: -0.40625, y: -3.5}
+      - {x: -1.40625, y: -3.3125}
+      - {x: -9.59375, y: -3.3125}
+      - {x: -10.59375, y: -3.5}
+      - {x: -12.375, y: -3.5}
+      - {x: -12.5, y: -3.625}
+      - {x: -12.5, y: -6.5}
+      - {x: 12.5, y: -6.5}
+      - {x: 12.5, y: -3.625}
+    - - {x: 3.5, y: -1.625}
+      - {x: 3.625, y: -1.5}
+      - {x: 11.375, y: -1.5}
+      - {x: 11.5, y: -1.625}
+      - {x: 11.5, y: -1.78125}
+      - {x: 3.5, y: -1.78125}
+    - - {x: -10.5, y: 0.21875}
+      - {x: -10.5, y: 0.375}
+      - {x: -10.375, y: 0.5}
+      - {x: 11.375, y: 0.5}
+      - {x: 11.5, y: 0.375}
+      - {x: 11.5, y: 0.21875}
+    - - {x: -8.5, y: 3.21875}
+      - {x: -8.5, y: 3.375}
+      - {x: -8.375, y: 3.5}
+      - {x: -0.625, y: 3.5}
+      - {x: -0.5, y: 3.375}
+      - {x: -0.5, y: 3.21875}
 --- !u!212 &359931101
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -809,6 +809,30 @@ PrefabInstance:
     - target: {fileID: 1151169384, guid: 48dc597b3790de148b5ee0b1582b4661, type: 3}
       propertyPath: m_RefResolutionY
       value: 360
+      objectReference: {fileID: 0}
+    - target: {fileID: 725805338, guid: 48dc597b3790de148b5ee0b1582b4661, type: 3}
+      propertyPath: m_TargetGraphic
+      value: 
+      objectReference: {fileID: 897643762}
+    - target: {fileID: 725805338, guid: 48dc597b3790de148b5ee0b1582b4661, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1260813452}
+    - target: {fileID: 725805338, guid: 48dc597b3790de148b5ee0b1582b4661, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Button_Select
+      objectReference: {fileID: 0}
+    - target: {fileID: 725805338, guid: 48dc597b3790de148b5ee0b1582b4661, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 725805338, guid: 48dc597b3790de148b5ee0b1582b4661, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 725805338, guid: 48dc597b3790de148b5ee0b1582b4661, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 48dc597b3790de148b5ee0b1582b4661, type: 3}
@@ -1814,6 +1838,18 @@ MonoBehaviour:
   - {fileID: 0}
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &897643762 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1925800327, guid: 48dc597b3790de148b5ee0b1582b4661,
+    type: 3}
+  m_PrefabInstance: {fileID: 380067323}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &902609271
 GameObject:
   m_ObjectHideFlags: 0
@@ -2880,6 +2916,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1194376519}
   m_CullTransparentMesh: 0
+--- !u!114 &1260813452 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 725805339, guid: 48dc597b3790de148b5ee0b1582b4661,
+    type: 3}
+  m_PrefabInstance: {fileID: 380067323}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27bf2f4349f452b468dc71e531ab85f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1295973091
 GameObject:
   m_ObjectHideFlags: 0
@@ -4472,12 +4520,12 @@ PrefabInstance:
     - target: {fileID: 1234771349870196302, guid: 47328cd2eb44d7c4983080209d4d26b7,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 26.38
+      value: 0.07
       objectReference: {fileID: 0}
     - target: {fileID: 1234771349870196302, guid: 47328cd2eb44d7c4983080209d4d26b7,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.47
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 1234771349870196302, guid: 47328cd2eb44d7c4983080209d4d26b7,
         type: 3}
