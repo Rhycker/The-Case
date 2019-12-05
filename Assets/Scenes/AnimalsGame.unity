@@ -773,6 +773,11 @@ PrefabInstance:
       propertyPath: stepHeight
       value: 0.2222222
       objectReference: {fileID: 0}
+    - target: {fileID: 6243791624180943286, guid: 48dc597b3790de148b5ee0b1582b4661,
+        type: 3}
+      propertyPath: climbAnimation
+      value: 
+      objectReference: {fileID: 7400000, guid: c46cf1e66ac47d34297e61abe24bbb2b, type: 2}
     - target: {fileID: 8598249495887286936, guid: 48dc597b3790de148b5ee0b1582b4661,
         type: 3}
       propertyPath: movementForce
