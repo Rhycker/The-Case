@@ -9,8 +9,20 @@ public class Inventory : MonoBehaviour {
 
 	[SerializeField] private InventoryPanel inventoryPanel;
 
+	private List<Item> items;
+
+	public bool ContainsItem(Item item) {
+		return items.Contains(item);
+	}
+
 	public void AddItem(Item item) {
+		items.Add(item);
 		inventoryPanel.AddItemWidget(item);
+	}
+
+	public void RemoveItem(Item item) {
+		items.Remove(item);
+		inventoryPanel.RemoveItemWidget(item);
 	}
 
 	private void Awake() {

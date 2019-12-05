@@ -7,6 +7,9 @@ public class InventoryPanel : MonoBehaviour {
 	public bool IsActive { get { return gameObject.activeInHierarchy; } }
 	public int MaxItemCount { get; private set; }
 
+	public delegate void ItemUsageDelegate(Item item);
+	public event ItemUsageDelegate OnItemUse;
+
 	[SerializeField] private ItemInteractionPopup interactionPopup;
 	[SerializeField] private GameObject selectionIndicatorContainer;
 	[SerializeField] private GameObject combineIndicatorContainer;
@@ -70,9 +73,9 @@ public class InventoryPanel : MonoBehaviour {
 			Item itemB = itemWidget.Item;
 			Item combinedItem = itemA.Combine(itemB);
 			if(combinedItem != null) {
-				sortedItems.Remove(selectedCombineItem);
-				sortedItems.Remove(itemWidget.UniqueItem);
-				AddItemWidget(combinedItem);
+				Inventory.Instance.RemoveItem(itemA);
+				Inventory.Instance.RemoveItem(itemB);
+				Inventory.Instance.AddItem(combinedItem);
 			}
 
 			UpdateInteractionCombineState();
@@ -86,8 +89,19 @@ public class InventoryPanel : MonoBehaviour {
 		InteractItemWidget(itemWidget);
 	}
 
-	private void RemoveItem(ItemWidget itemWidget) {
-		sortedItems.Remove(itemWidget.UniqueItem);
+	public void Button_Use(ItemWidget itemWidget) {
+		OnItemUse?.Invoke(itemWidget.Item);
+	}
+
+	public void RemoveItemWidget(Item item) {
+		int widgetItemIndex = 0;
+		for(int i = 0; i < sortedItems.Count; i ++) {
+			if(sortedItems[i].Item == item) {
+				widgetItemIndex = i;
+				break;
+			}
+		}
+		sortedItems.RemoveAt(widgetItemIndex);
 		UpdateItemWidgets();
 	}
 
@@ -184,7 +198,6 @@ public class InventoryPanel : MonoBehaviour {
 		}
 		sortedItems = newSortedItems;
 		
-		// Add the items the new order
 		UpdateItemWidgets();
 	}
 

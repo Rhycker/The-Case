@@ -12,6 +12,7 @@ public abstract class InteractableObject : MonoBehaviour {
 		interactionIcon.SetActive(show);
 	}
 
-	public abstract void Interact();
-	
+	public virtual void Interact() { }
+	public virtual void UseItem(Item item) { }
+
 }
