@@ -1,17 +1,11 @@
 ﻿using UnityEngine;
 
 public class Room : MonoBehaviour {
+	
+	public Vector3 PlayerSpawnPosition { get; private set; }
+	public Color BackgroundColor { get { return backgroundColor; } }
 
-	public Vector3 OriginPosition {
-		get {
-			Vector3 spawnPosition = transform.position;
-			spawnPosition.y = floorHeightOrigin.position.y;
-			return spawnPosition;
-		}
-	}
-	public float PlayerSpawnPositionX { get; private set; }
-
-	[SerializeField] private Transform floorHeightOrigin;
+	[SerializeField] private Color backgroundColor;
 
 	private Door[] doors;
 
@@ -22,7 +16,7 @@ public class Room : MonoBehaviour {
 	public void Prepare(Room previous) {
 		foreach(Door door in doors) {
 			if(door.TargetRoom == previous) {
-				PlayerSpawnPositionX = door.transform.position.x;
+				PlayerSpawnPosition = door.transform.position;
 				return;
 			}
 		}

@@ -30,8 +30,7 @@ public class Player : MonoBehaviour {
 	}
 
 	private void OnRoomEntered(Room nextRoom) {
-		transform.position = nextRoom.EntrancePosition;
-		Debug.DrawLine(nextRoom.EntrancePosition, transform.position, Color.red, 1f);
+		transform.position = nextRoom.PlayerSpawnPosition;
 	}
 
 }
