@@ -33,6 +33,7 @@ public class PlayerInteractions : MonoBehaviour {
 
 	private void OnTriggerExit2D(Collider2D collider) {
 		if (collider.tag != "Interactable") { return; }
+		if (interactableObject == null) { return; }
 
 		InteractableObject interactable = collider.GetComponent<InteractableObject>();
 		if (interactableObject != interactable) { return; }
