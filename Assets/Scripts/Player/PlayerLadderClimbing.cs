@@ -1,10 +1,12 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class PlayerLadderClimbing : MonoBehaviour {
 
 	// Those values are synced with the animator
 	private enum ClimbingState {
-		None = -1,
+		None = -2,
+		Transition = -1,
 		HoldStill = 0,
 		ClimbUp = 1,
 		ClimbDown = 2
@@ -12,19 +14,31 @@ public class PlayerLadderClimbing : MonoBehaviour {
 
 	public bool IsClimbingLadder { get { return climbingState != ClimbingState.None; } }
 
+	[SerializeField] private AnimationClip climbStartAnimation;
+	[SerializeField] private AnimationClip climbStopAnimation;
 	[SerializeField] private AnimationClip climbAnimation;
 	[SerializeField] private float minDistanceToLadder;
 	[SerializeField] private float stepHeight;
 
-	private ClimbingState climbingState;
+	private ClimbingState _climbingState;
+	private ClimbingState climbingState {
+		get { return _climbingState; }
+		set {
+			animator.SetInteger("climbingState", (int)value);
+			_climbingState = value;
+		}
+	}
+
 	private Animator animator;
 	private new Rigidbody2D rigidbody;
+	
 	private float climbSpeed;
+	private float remainingStepDuration;
+
 	private Ladder currentLadder;
 	private int currentStep;
-	private float currentStepYPosition;
 	private int targetStep;
-	private float targetStepYPosition;
+	private Vector2 targetStepPosition;
 
 	public bool StartClimbingLadder(float verticalInput) {
 		if (IsClimbingLadder) { return false; }
@@ -42,78 +56,93 @@ public class PlayerLadderClimbing : MonoBehaviour {
 	}
 
 	public void TraverseLadder(float verticalInput) {
+		if (climbingState == ClimbingState.Transition) { return; }
 		if (verticalInput == 0 && climbingState == ClimbingState.HoldStill) { return; }
-		if (verticalInput != 0 && climbingState == ClimbingState.HoldStill) {
-			UpdateClimbingState(verticalInput);
+
+		if(remainingStepDuration > 0f) {
+			remainingStepDuration -= Time.deltaTime;
+			if(remainingStepDuration > 0f) { return; }
+
+			// target step reached
+			rigidbody.MovePosition(targetStepPosition);
+			currentStep = targetStep;
+			if (verticalInput == 0) {
+				climbingState = ClimbingState.HoldStill;
+				return;
+			}
 		}
 
-		float climbDirection = climbingState == ClimbingState.ClimbUp ? 1f : -1f;
-		Vector2 newPosition = (Vector2)transform.position + Vector2.up * climbDirection * climbSpeed * Time.fixedDeltaTime;
+		// start climbing the new step, or stop climbing if we reached the end
 		Vector2 endPosition = Vector2.zero;
-		if (currentLadder.StopClimbing(newPosition, out endPosition)) {
-			rigidbody.MovePosition(endPosition);
-			StopClimbingLadder();
-			return;
+		if (currentLadder.StopClimbing(currentStep, verticalInput, out endPosition)) {
+			StopClimbingLadder(endPosition);
 		}
-		
-		if(climbingState == ClimbingState.ClimbUp && newPosition.y >= targetStepYPosition) {
-			Debug.Log("DetermineDirection");
-			currentStep = targetStep;
-			UpdateClimbingState(verticalInput);
+		else {
+			ContinueClimbing(verticalInput);
 		}
-		else if(climbingState == ClimbingState.ClimbDown && newPosition.y <= targetStepYPosition) {
-			currentStep = targetStep;
-			UpdateClimbingState(verticalInput);
-		}
-
-		if (climbingState == ClimbingState.None) {
-			newPosition.y = targetStepYPosition;
-		}
-		rigidbody.MovePosition(newPosition);
 	}
 
 	private void Awake() {
 		rigidbody = GetComponent<Rigidbody2D>();
 		animator = GetComponentInChildren<Animator>();
 		climbSpeed = stepHeight / climbAnimation.length;
-		StopClimbingLadder();
+		climbingState = ClimbingState.None; 
 	}
 
-	private void UpdateClimbingState(float verticalInput) {
+	private void ContinueClimbing(float verticalInput) {
 		if (verticalInput == 0f) {
-			climbingState = ClimbingState.HoldStill;
-			animator.SetInteger("climbingState", 0);
+			Debug.LogWarning("Cant climb if the iput is zero! Aborting...");
+			return;
 		}
-		else if (verticalInput > 0f) {
-			StartTraversingStep(true);
+
+		if (verticalInput > 0f) {
+			climbingState = ClimbingState.ClimbUp;
+			targetStep = currentStep + 1;
 		}
 		else {
-			StartTraversingStep(false);
+			climbingState = ClimbingState.ClimbDown;
+			targetStep = currentStep - 1;
 		}
+
+		float targetStepYPosition = currentLadder.BottomYPosition + targetStep * stepHeight;
+		targetStepPosition = new Vector2(transform.position.x, targetStepYPosition);		
+		remainingStepDuration = climbAnimation.length;
 	}
 
 	private void StartClimbingLadder(bool stepUp) {
-		rigidbody.isKinematic = true;
-		rigidbody.velocity = Vector2.zero;
-		animator.SetTrigger("startClimbing");
-		Vector2 startPosition = currentLadder.GetStartPosition(transform.position, out currentStep);
-		rigidbody.MovePosition(startPosition);
-		StartTraversingStep(stepUp);
+		climbingState = ClimbingState.Transition;
+		string transitionTrigger = "startClimbingDown";
+		if (stepUp) {
+			bool startRightFromLadder = transform.position.x > currentLadder.transform.position.x;
+			transitionTrigger = startRightFromLadder ? "startClimbingUpFromRight" : "startClimbingUpFromLeft";
+		}
+		animator.SetTrigger(transitionTrigger);
+
+		CoroutineHelper.WaitForSeconds(climbStartAnimation.length, () => {
+			rigidbody.velocity = Vector2.zero;
+			rigidbody.isKinematic = true;
+			Vector2 startPosition = currentLadder.GetStartPosition(transform.position, out currentStep);
+			transform.position = startPosition;
+			climbingState = ClimbingState.HoldStill;
+		});
 	}
 
-	private void StartTraversingStep(bool stepUp) {
-		Debug.Log("Start traversing step");
-		targetStep = stepUp ? currentStep + 1 : currentStep - 1;
-		climbingState = stepUp ? ClimbingState.ClimbUp : ClimbingState.ClimbDown;
-		animator.SetInteger("climbingState", (int)climbingState);
-		currentStepYPosition = currentLadder.BottomYPosition + currentStep * stepHeight;
-		targetStepYPosition = currentLadder.BottomYPosition + targetStep * stepHeight;
-	}
+	private void StopClimbingLadder(Vector2 endPosition) {
+		Action stopClimbing = () => {
+			Debug.Log("Stop climbing");
+			rigidbody.MovePosition(endPosition);
+			climbingState = ClimbingState.None;
+			rigidbody.isKinematic = false;
+		};
 
-	private void StopClimbingLadder() {
-		climbingState = ClimbingState.None;
-		animator.SetInteger("climbingState", -1);
-		rigidbody.isKinematic = false;
+		if (currentLadder.transform.position.y > transform.position.y) {
+			stopClimbing();
+		}
+		else {
+			animator.SetTrigger("stopClimbingUp");
+			climbingState = ClimbingState.Transition;
+			CoroutineHelper.WaitForSeconds(climbStopAnimation.length, stopClimbing);
+		}
 	}
 
 	private void OnTriggerEnter2D(Collider2D collider) {

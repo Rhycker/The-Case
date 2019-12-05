@@ -8,6 +8,7 @@ public class Ladder : MonoBehaviour {
 	[SerializeField] private Transform climbingStartBottom;
 	[SerializeField] private Transform climbingDestinationTop;
 	[SerializeField] private int steps;
+	[SerializeField] private int topEndingStep;
 
 	public Vector3 GetStartPosition(Vector3 position, out int startStep) {
 		float distanceToTop = Mathf.Abs(position.y - climbingStartTop.position.y);
@@ -23,18 +24,17 @@ public class Ladder : MonoBehaviour {
 		}
 	}
 
-	public bool StopClimbing(Vector3 position, out Vector2 endPosition) {
-		endPosition = Vector2.zero;
-
-		if(position.y <= climbingStartBottom.position.y) {
+	public bool StopClimbing(int currentStep, float climbInput, out Vector2 endPosition) {
+		if (currentStep == 0 && climbInput < 0f) {
 			endPosition = climbingStartBottom.transform.position;
 			return true;
 		}
-		else if (position.y >= climbingStartTop.position.y) {
+		else if(currentStep == topEndingStep && climbInput > 0f) {
 			endPosition = climbingDestinationTop.transform.position;
 			return true;
 		}
 
+		endPosition = Vector2.zero;
 		return false;
 	}
 	

@@ -766,7 +766,7 @@ PrefabInstance:
     - target: {fileID: 6243791624180943286, guid: 48dc597b3790de148b5ee0b1582b4661,
         type: 3}
       propertyPath: minDistanceToLadder
-      value: 0.1
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 6243791624180943286, guid: 48dc597b3790de148b5ee0b1582b4661,
         type: 3}
@@ -778,6 +778,11 @@ PrefabInstance:
       propertyPath: climbAnimation
       value: 
       objectReference: {fileID: 7400000, guid: c46cf1e66ac47d34297e61abe24bbb2b, type: 2}
+    - target: {fileID: 6243791624180943286, guid: 48dc597b3790de148b5ee0b1582b4661,
+        type: 3}
+      propertyPath: climbTransitionAnimation
+      value: 
+      objectReference: {fileID: 7400000, guid: dda7f04984209174d8d0bb8d3a9b0174, type: 2}
     - target: {fileID: 8598249495887286936, guid: 48dc597b3790de148b5ee0b1582b4661,
         type: 3}
       propertyPath: movementForce
