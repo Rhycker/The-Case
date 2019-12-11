@@ -3639,7 +3639,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1002985824}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.88907135, y: 0.492, z: -6.4345703}
+  m_LocalPosition: {x: 1.46, y: 0.492, z: -6.4345703}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1077709409}
@@ -3678,6 +3678,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactionIcon: {fileID: 1077709408}
+  interactionSound: {fileID: 8300000, guid: 9354e43614ac3664480918feb414a58c, type: 3}
   requiredItem: {fileID: 11400000, guid: e64cda692e7e29c499b74c1d0012a2fd, type: 2}
 --- !u!61 &1002985829
 BoxCollider2D:
@@ -3715,7 +3716,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: f48212b5823a1a14881ee927f9521040, type: 3}
+  m_audioClip: {fileID: 8300000, guid: cc1a839eef24fed49b572813abe1a135, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -3725,8 +3726,8 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
+  MinDistance: 0.5
+  MaxDistance: 3.5
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -3761,7 +3762,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -3980,7 +3981,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300008, guid: 495af3b23d44dcb4cbc389510b4f6249, type: 3}
+  m_Sprite: {fileID: 21300004, guid: 495af3b23d44dcb4cbc389510b4f6249, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -4048,7 +4049,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.5224469, y: 0.63}
+  m_Offset: {x: -0.44935685, y: 0.63}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -4059,7 +4060,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.755115, y: 1.24}
+  m_Size: {x: 1.9012951, y: 1.24}
   m_EdgeRadius: 0
 --- !u!1 &1128118519
 GameObject:
@@ -6855,7 +6856,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &1857633604
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -7320,7 +7321,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1967483319}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.0477977, y: -3.313, z: 0}
+  m_LocalPosition: {x: -3.34, y: -3.313, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1082922031}
@@ -8083,7 +8084,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 088d61af18f90cd4e8e3d1f2234d1512, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementForce: 12
+  movementForce: 22
   animator: {fileID: 1189897273}
 --- !u!114 &8598249496115957604
 MonoBehaviour:
