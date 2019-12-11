@@ -4,8 +4,10 @@ public class Room : MonoBehaviour {
 	
 	public Vector3 PlayerSpawnPosition { get; private set; }
 	public Color BackgroundColor { get { return backgroundColor; } }
+	public CameraController.Bounds CameraBounds { get { return cameraBounds; } }
 
 	[SerializeField] private Color backgroundColor;
+	[SerializeField] private CameraController.Bounds cameraBounds;
 
 	private Door[] doors;
 
