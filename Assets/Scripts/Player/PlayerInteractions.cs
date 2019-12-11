@@ -22,7 +22,7 @@ public class PlayerInteractions : MonoBehaviour {
 		if(interactableObject != null) {
 			interactableObject.ShowInteractIcon(false);
 		}
-		interactableObject = collider.GetComponent<InteractableObject>();
+		interactableObject = collider.GetComponentInParent<InteractableObject>();
 		if (!interactableObject.CanInteract) { return; }
 
 		interactableObject.ShowInteractIcon(true);
@@ -32,7 +32,7 @@ public class PlayerInteractions : MonoBehaviour {
 		if (collider.tag != "Interactable") { return; }
 		if (interactableObject == null) { return; }
 
-		InteractableObject interactable = collider.GetComponent<InteractableObject>();
+		InteractableObject interactable = collider.GetComponentInParent<InteractableObject>();
 		if (interactableObject != interactable) { return; }
 
 		interactableObject.ShowInteractIcon(false);

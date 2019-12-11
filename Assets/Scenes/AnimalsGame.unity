@@ -1287,7 +1287,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1967483321}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &418263332
 SpriteRenderer:
@@ -3644,7 +3644,7 @@ Transform:
   m_Children:
   - {fileID: 1077709409}
   m_Father: {fileID: 1967483321}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &1002985827
 Animator:
@@ -3895,6 +3895,76 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1082922030
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1082922031}
+  - component: {fileID: 1082922033}
+  - component: {fileID: 1082922032}
+  m_Layer: 0
+  m_Name: PlayerCloseDetector
+  m_TagString: Interactable
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1082922031
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1082922030}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1967483321}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1082922032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1082922030}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d543fc19fd8b7341968d20ab01dce41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!61 &1082922033
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1082922030}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.63}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 3.58, y: 1.24}
+  m_EdgeRadius: 0
 --- !u!1 &1128118519
 GameObject:
   m_ObjectHideFlags: 0
@@ -6281,7 +6351,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1967483321}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1687348062
 SpriteRenderer:
@@ -7056,7 +7126,7 @@ GameObject:
   - component: {fileID: 1967483321}
   - component: {fileID: 1967483320}
   - component: {fileID: 1967483322}
-  - component: {fileID: 1967483323}
+  - component: {fileID: 1967483324}
   m_Layer: 0
   m_Name: characterWoodcutter
   m_TagString: Interactable
@@ -7101,7 +7171,7 @@ SpriteRenderer:
   m_SortingLayerID: 977210229
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300018, guid: 495af3b23d44dcb4cbc389510b4f6249, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a33d8df9e1a04524da51b58e7168b333, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -7123,6 +7193,7 @@ Transform:
   m_LocalPosition: {x: -3.0477977, y: -3.313, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 1082922031}
   - {fileID: 1687348061}
   - {fileID: 418263331}
   - {fileID: 1002985826}
@@ -7141,36 +7212,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e755b3dbc90068e4bb68c2df188e9136, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactionIcon: {fileID: 418263330}
-  talkIcon: {fileID: 1687348060}
+  interactionIcon: {fileID: 1687348060}
+  fireRequestIcon: {fileID: 418263330}
   fire: {fileID: 1002985828}
+  playerCloseDetector: {fileID: 1082922032}
   rewardItem: {fileID: 11400000, guid: 5c2ca7d99135c7242a8a626495fc3a64, type: 2}
---- !u!61 &1967483323
-BoxCollider2D:
+--- !u!95 &1967483324
+Animator:
+  serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1967483319}
   m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.5}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0}
-    oldSize: {x: 0.65625, y: 1}
-    newSize: {x: 0.4375, y: 0.6666667}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.65625, y: 1}
-  m_EdgeRadius: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c43fab3e61677d541b4731eccda6cc72, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &1968883450
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8025,7 +8090,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8598249496115957600}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.39, y: 0.09, z: 0}
+  m_LocalPosition: {x: -4.35, y: -3.54, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8598249494361946820}

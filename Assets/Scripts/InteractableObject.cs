@@ -7,12 +7,16 @@ public abstract class InteractableObject : MonoBehaviour {
 	[SerializeField] private GameObject interactionIcon;
 
 	protected virtual void Awake() {
-		interactionIcon.SetActive(false);
+		if (interactionIcon != null) {
+			interactionIcon.SetActive(false);
+		}
 		CanInteract = true;
 	}
 
 	public void ShowInteractIcon(bool show) {
-		interactionIcon.SetActive(show);
+		if (interactionIcon != null) {
+			interactionIcon.SetActive(show);
+		}
 	}
 
 	public virtual void Interact() { }
