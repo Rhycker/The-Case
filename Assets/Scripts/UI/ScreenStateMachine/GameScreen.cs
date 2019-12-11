@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(RectTransform))]
 public class GameScreen : MonoBehaviour {
@@ -29,6 +30,7 @@ public class GameScreen : MonoBehaviour {
 	public bool IsShowing { get; private set; }
 
 	[SerializeField] private bool isInteractable;
+	[SerializeField] private Button activeStartButton;
 
 	private RectTransform rectTransform;
 
@@ -56,13 +58,12 @@ public class GameScreen : MonoBehaviour {
 	protected void Show() {
 		gameObject.SetActive(true);
 		IsShowing = true;
-		Debug.Log("Show me");
+		activeStartButton.Select();
 	}
 
 	protected virtual void Hide() {
 		gameObject.SetActive(false);
 		IsShowing = false;
-		Debug.Log("Hide me");
 	}
 
 	private bool IsInRectTransform(Vector2 screenPosition) {
