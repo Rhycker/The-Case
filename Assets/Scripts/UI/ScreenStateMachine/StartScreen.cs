@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-public class StartScreen : GameScreenSingleton<StartScreen> {
+﻿public class StartScreen : GameScreenSingleton<StartScreen> {
 
 	public override GameScreenState Initialize() {
 		Instance = this;
@@ -11,7 +9,7 @@ public class StartScreen : GameScreenSingleton<StartScreen> {
 		base.Activate();
 	}
 
-	public void Button_GoToNextScreen() {
+	public void Button_Continue() {
 		ControllerScreen.Instance.Activate();
 	}
 	

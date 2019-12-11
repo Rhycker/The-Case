@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
-
-public class ControllerScreen : GameScreenSingleton<ControllerScreen> {
+﻿public class ControllerScreen : GameScreenSingleton<ControllerScreen> {
 
 	public override GameScreenState Initialize() {
 		Instance = this;
@@ -12,8 +9,7 @@ public class ControllerScreen : GameScreenSingleton<ControllerScreen> {
 		base.Activate();
 	}
 	
-
-	public void Button_GoToNextScreen() {
+	public void Button_Continue() {
 
 	}
 
