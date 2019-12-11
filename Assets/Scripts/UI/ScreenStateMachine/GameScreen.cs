@@ -56,11 +56,13 @@ public class GameScreen : MonoBehaviour {
 	protected void Show() {
 		gameObject.SetActive(true);
 		IsShowing = true;
+		Debug.Log("Show me");
 	}
 
 	protected virtual void Hide() {
 		gameObject.SetActive(false);
 		IsShowing = false;
+		Debug.Log("Hide me");
 	}
 
 	private bool IsInRectTransform(Vector2 screenPosition) {

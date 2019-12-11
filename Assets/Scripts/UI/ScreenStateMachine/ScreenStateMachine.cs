@@ -50,6 +50,8 @@ public class ScreenStateMachine : MonoBehaviour {
 		foreach(GameScreen screen in gameScreens) {
 			states.Add(screen.Initialize());
 		}
+
+		StartScreen.Instance.Activate();
 	}
 
 }
