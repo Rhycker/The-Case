@@ -10,11 +10,15 @@ public class Fire : InteractableObject {
 
 	public override void UseItem(Item item) {
 		if(item == requiredItem) {
+			// Ignite fire
 			Inventory.Instance.RemoveItem(item);
 			IsLit = true;
 			animator.enabled = true;
 			CanInteract = false;
 			ShowInteractIcon(false);
+
+			// Play audio:
+			GetComponent<AudioSource>().Play();
 		}
 	}
 

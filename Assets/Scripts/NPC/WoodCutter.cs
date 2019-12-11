@@ -2,7 +2,8 @@
 
 [RequireComponent(typeof(Animator))]
 public class WoodCutter : InteractableObject {
-	
+
+	[SerializeField] private AudioClip interactionSound;
 	[SerializeField] private GameObject fireRequestIcon;
 	[SerializeField] private Fire fire;
 	[SerializeField] private PlayerDetector playerCloseDetector;
@@ -12,7 +13,7 @@ public class WoodCutter : InteractableObject {
 	private Animator animator;
 
 	public override void Interact() {
-		Debug.Log("Interact me");
+		SoundManager.Instance.PlaySound(interactionSound);
 		if (fire.IsLit && rewardItem != null) {
 			CanInteract = false;
 			Inventory.Instance.AddItem(rewardItem);
