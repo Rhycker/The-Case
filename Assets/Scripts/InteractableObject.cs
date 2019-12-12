@@ -20,6 +20,6 @@ public abstract class InteractableObject : MonoBehaviour {
 	}
 
 	public virtual void Interact() { }
-	public virtual void UseItem(Item item) { }
+	public virtual bool UseItem(Item item) { return false; }
 
 }

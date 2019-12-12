@@ -15,8 +15,10 @@ public class InventoryPanel : MonoBehaviour {
 
 	[SerializeField] private ItemInteractionPopup interactionPopup;
 	[SerializeField] private GameObject selectionIndicatorContainer;
+	[SerializeField] private GameObject warningIndicatorContainer;
 	[SerializeField] private GameObject combineIndicatorContainer;
 	[SerializeField] private float minSelectionSwitchTime;
+	[SerializeField] private float warningShowDuration;
 
 	private int itemCount { get { return sortedItems.Count; } }
 	private List<ItemWidget> itemWidgets;
@@ -30,11 +32,15 @@ public class InventoryPanel : MonoBehaviour {
 	private ScrollState currentScrollState;
 	private float selectionTime;
 
+	private bool isShowingWarning;
+
 	public void Toggle() {
 		if (IsActive) {
 			gameObject.SetActive(false);
 			UpdateInteractionCombineState();
 			interactionPopup.Deactivate();
+			warningIndicatorContainer.SetActive(false);
+			isShowingWarning = false;
 		}
 		else {
 			gameObject.SetActive(true);
@@ -47,6 +53,20 @@ public class InventoryPanel : MonoBehaviour {
 		sortedItems.Insert(0, uniqueItem);
 		UpdateItemWidgets();
 		UpdateInteractionCombineState();
+	}
+
+	public void ShowWarning(bool show) {
+		if(show && isShowingWarning) { return; }
+
+		warningIndicatorContainer.SetActive(show);
+		if (show) {
+			CoroutineHelper.WaitForSeconds(warningShowDuration, () => {
+				warningIndicatorContainer.SetActive(false);
+				isShowingWarning = false;
+			});
+		}
+
+		isShowingWarning = show;
 	}
 
 	public void StartCombining() {

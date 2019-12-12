@@ -63,8 +63,13 @@ public class ItemInteractionPopup : MonoBehaviour {
 	}
 
 	private void UseItem() {
-		inventoryPanel.Toggle();
-		interactionScript.UseItem(item);
+		bool usedItem = interactionScript.UseItem(item);
+		if (usedItem) {
+			inventoryPanel.Toggle();
+		}
+		else {
+			inventoryPanel.ShowWarning(true);
+		}
 	}
 
 }

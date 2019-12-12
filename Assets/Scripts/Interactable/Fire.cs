@@ -9,20 +9,22 @@ public class Fire : InteractableObject {
 	[AssetDropdown("Items", typeof(Item))] [SerializeField] private Item requiredItem;
 	private Animator animator;
 
-	public override void UseItem(Item item) {
-		if(item == requiredItem) {
-            // Ignite fire sound
-            SoundManager.Instance.PlaySound(interactionSound);
-            // Ignite fire
-            Inventory.Instance.RemoveItem(item);
-			IsLit = true;
-			animator.enabled = true;
-			CanInteract = false;
-			ShowInteractIcon(false);
+	public override bool UseItem(Item item) {
+		if(item != requiredItem) { return false; }
 
-			// Play audio:
-			GetComponent<AudioSource>().Play();
-		}
+        // Ignite fire
+        Inventory.Instance.RemoveItem(item);
+		IsLit = true;
+		animator.enabled = true;
+		CanInteract = false;
+		ShowInteractIcon(false);
+
+        // Ignite fire sound
+        SoundManager.Instance.PlaySound(interactionSound);
+		// Play looping fire audio:
+		GetComponent<AudioSource>().Play();
+
+		return true;
 	}
 
 	protected override void Awake() {

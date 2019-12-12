@@ -185,7 +185,7 @@ Canvas:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 90872953}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 2
   m_Camera: {fileID: 1379544734}
@@ -2999,8 +2999,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactionPopup: {fileID: 1219900795}
   selectionIndicatorContainer: {fileID: 886825127}
+  warningIndicatorContainer: {fileID: 862646969}
   combineIndicatorContainer: {fileID: 1798115115}
   minSelectionSwitchTime: 0.3
+  warningShowDuration: 0.5
 --- !u!1 &831104831
 GameObject:
   m_ObjectHideFlags: 0

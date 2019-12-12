@@ -4,9 +4,9 @@ public class PlayerInteractions : MonoBehaviour {
 
 	private InteractableObject interactableObject;
 
-	public void UseItem(Item item) {
-		if(interactableObject == null) { return; }
-		interactableObject.UseItem(item);
+	public bool UseItem(Item item) {
+		if(interactableObject == null) { return false; }
+		return interactableObject.UseItem(item);
 	}
 
 	private void Update() {
