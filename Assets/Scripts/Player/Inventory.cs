@@ -7,7 +7,6 @@ public class Inventory : MonoBehaviour {
 
 	public bool IsShowing { get { return inventoryPanel.IsActive; } }
 	public delegate void ItemDelegate(Item item);
-	public event ItemDelegate OnItemObtained;
 
 	[SerializeField] private InventoryPanel inventoryPanel;
 	
@@ -20,7 +19,7 @@ public class Inventory : MonoBehaviour {
 	public void AddItem(Item item) {
 		items.Add(item);
 		inventoryPanel.AddItemWidget(item);
-		OnItemObtained?.Invoke(item);
+		Notification.Instance.Show(item.NotificationSprite);
 	}
 
 	public void RemoveItem(Item item) {

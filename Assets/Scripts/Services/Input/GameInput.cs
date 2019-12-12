@@ -17,7 +17,7 @@ public class GameInput : MonoBehaviour {
 
 	private void Awake() {
 		if(Service != null) { return; }
-		Service = new KeyboardInput();
+		Service = new WindowsInput();
 	}
 
 }

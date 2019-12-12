@@ -123,7 +123,7 @@ public class InventoryPanel : MonoBehaviour {
 			InteractItemWidget(topItemWidget);
 		}
 
-		float horizontalInput = GameInput.Instance.Service.Horizontal();
+		float horizontalInput = GameInput.Instance.Service.InventoryHorizontal();
 		if (horizontalInput < -0.3f) {
 			UpdateSelection(false);
 		}
