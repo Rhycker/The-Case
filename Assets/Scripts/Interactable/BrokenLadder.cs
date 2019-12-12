@@ -1,10 +1,18 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class BrokenLadder : MonoBehaviour {
+public class BrokenLadder : InteractableObject {
 
-	private void Awake() {
-        
-    }
-	
+	[SerializeField] private GameObject brokenLadderVisuals;
+	[SerializeField] private GameObject repairedLadder;
+	[AssetDropdown("Items", typeof(Item))] [SerializeField] private Item requiredRepairItem;
+
+	public override void UseItem(Item item) {
+		if(item == requiredRepairItem) {
+			brokenLadderVisuals.SetActive(false);
+			repairedLadder.SetActive(true);
+			Inventory.Instance.RemoveItem(item);
+			CanInteract = false;
+		}
+	}
+
 }
