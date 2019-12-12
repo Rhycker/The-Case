@@ -63,7 +63,6 @@ public class ItemInteractionPopup : MonoBehaviour {
 	}
 
 	private void UseItem() {
-		Debug.Log("Use " + item.name);
 		inventoryPanel.Toggle();
 		interactionScript.UseItem(item);
 	}
