@@ -185,7 +185,7 @@ Canvas:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 90872953}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_RenderMode: 2
   m_Camera: {fileID: 1379544734}
@@ -2866,7 +2866,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 751692380}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 11.455999, y: -1.45, z: 0}
+  m_LocalPosition: {x: 11.375, y: -1.498, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 199412885}
@@ -2997,6 +2997,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95bdd7cdefa1cfa418161d1fd26d7b1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scrollSound: {fileID: 8300000, guid: b707887e9d63f7647bc97dfb70ed6a88, type: 3}
   interactionPopup: {fileID: 1219900795}
   selectionIndicatorContainer: {fileID: 886825127}
   warningIndicatorContainer: {fileID: 862646969}
@@ -5639,8 +5640,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1323163905}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 3.36, z: 1}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -0.00000047684, y: 3.36, z: 1}
+  m_LocalScale: {x: 0.3333, y: 0.3333, z: 0.3333}
   m_Children: []
   m_Father: {fileID: 1379544733}
   m_RootOrder: 0
@@ -5724,6 +5725,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91fa6298c88a7f94a9243790db9d26c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactionSound: {fileID: 8300000, guid: e851dc1b12e41c54989223888813ac4d, type: 3}
 --- !u!222 &1330480196
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -8347,7 +8349,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactionIcon: {fileID: 1687348060}
-  interactionSound: {fileID: 8300000, guid: f48212b5823a1a14881ee927f9521040, type: 3}
+  interactionSound: {fileID: 8300000, guid: 5e5744180dd71644380a92c10e10be20, type: 3}
   fireRequestIcon: {fileID: 418263330}
   fire: {fileID: 1002985828}
   playerCloseDetector: {fileID: 1082922032}
@@ -8386,7 +8388,7 @@ PrefabInstance:
     - target: {fileID: 2889363172600480072, guid: 2fab91c9bc0b96e49a2fb5dbb72c1491,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2889363172600480074, guid: 2fab91c9bc0b96e49a2fb5dbb72c1491,
         type: 3}
@@ -9107,7 +9109,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 088d61af18f90cd4e8e3d1f2234d1512, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementForce: 14
+  FallingSound: {fileID: 8300000, guid: bed493249b21890429fde802cba2e49a, type: 3}
+  movementForce: 15
   animator: {fileID: 1189897273}
   leanOverAnimation: {fileID: 7400000, guid: ac58a2c72ed91c244ac7610ba5ee4a9b, type: 2}
 --- !u!114 &8598249496115957604
@@ -9122,6 +9125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27066b404f8047641b71869c6e2ffd0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useSound: {fileID: 8300000, guid: 236afdf37f0e0e04b82440de6351c22f, type: 3}
 --- !u!60 &8598249496115957605
 PolygonCollider2D:
   m_ObjectHideFlags: 0

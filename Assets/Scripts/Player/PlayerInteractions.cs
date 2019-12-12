@@ -2,10 +2,13 @@
 
 public class PlayerInteractions : MonoBehaviour {
 
-	private InteractableObject interactableObject;
+    [SerializeField] private AudioClip useSound;
+    private InteractableObject interactableObject;
 
 	public bool UseItem(Item item) {
-		if(interactableObject == null) { return false; }
+        //Raf use sound 
+        SoundManager.Instance.PlaySound(useSound);
+        if (interactableObject == null) { return false; }
 		return interactableObject.UseItem(item);
 	}
 

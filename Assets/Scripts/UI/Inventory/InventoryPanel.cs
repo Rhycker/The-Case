@@ -3,8 +3,9 @@ using System.Linq;
 using UnityEngine;
 
 public class InventoryPanel : MonoBehaviour {
+    [SerializeField] private AudioClip scrollSound;
 
-	private enum ScrollState {
+    private enum ScrollState {
 		Right = -1,
 		None,
 		Left = 1
@@ -110,7 +111,7 @@ public class InventoryPanel : MonoBehaviour {
 	}
 
 	public void Button_InteractItemWidget(ItemWidget itemWidget) {
-		InteractItemWidget(itemWidget);
+        InteractItemWidget(itemWidget);
 	}
 
 	public void RemoveItemWidget(Item item) {
@@ -181,7 +182,9 @@ public class InventoryPanel : MonoBehaviour {
 	}
 
 	private void SelectItemWidget(int indexShift) {
-		if (itemCount <= 1) { return; }
+        //Raf scroll sound 
+        SoundManager.Instance.PlaySound(scrollSound);
+        if (itemCount <= 1) { return; }
 
 		selectionTime = Time.time;
 		int targetIndex = indexShift;
@@ -233,12 +236,12 @@ public class InventoryPanel : MonoBehaviour {
 	private ScrollState GetCurrentScrollState() {
 		float horizontal = GameInput.Instance.Service.InventoryHorizontal();
 		if (horizontal < -0.3f) {
-			return ScrollState.Left;
+            return ScrollState.Right;
 		}
 		else if (horizontal > 0.3f) {
-			return ScrollState.Right;
+            return ScrollState.Left;
 		}
 		return ScrollState.None;
-	}
 
+	}
 }
