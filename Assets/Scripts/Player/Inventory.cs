@@ -36,12 +36,17 @@ public class Inventory : MonoBehaviour {
 		if (GameInput.Instance.Service.InventoryButtonDown()) {
 			inventoryPanel.Toggle();
 		}
+		else if(inventoryPanel.IsActive && GameInput.Instance.Service.BackButtonDown()) {
+			inventoryPanel.Toggle();
+		}
 
+#if UNITY_EDITOR
 		if (Input.GetKeyUp(KeyCode.Space)) {
 			Item[] allItems = Resources.LoadAll<Item>("Items");
 			Item item = allItems[Random.Range(0, allItems.Length)];
 			AddItem(item);
 		}
+#endif
 	}
 
 }
