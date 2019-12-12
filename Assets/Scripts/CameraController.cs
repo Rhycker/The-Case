@@ -3,7 +3,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(Camera))]
 public class CameraController : MonoBehaviour {
-	
+
 	[Serializable]
 	public class Bounds {
 		public bool YMaxEnabled = false;
@@ -20,9 +20,6 @@ public class CameraController : MonoBehaviour {
 	[SerializeField] private float smoothTime;
 	[Space]
 	[SerializeField] private Room startRoom;
-	[Space]
-	[SerializeField] private SpriteRenderer itemNotificationRenderer;
-	[SerializeField] private Animator itemNotificationAnimator;
 	
 	private Vector3 velocity = Vector3.zero;
 	private new Camera camera;
@@ -31,16 +28,9 @@ public class CameraController : MonoBehaviour {
 	private void Awake() {
 		transform.SetParent(null);
 		RoomNavigation.Instance.OnRoomEntered += OnRoomEntered;
-		Inventory.Instance.OnItemObtained += OnItemObtained;
-		itemNotificationRenderer.gameObject.SetActive(true);
 
 		camera = GetComponent<Camera>();
 		currentBounds = startRoom.CameraBounds;
-	}
-
-	private void OnItemObtained(Item item) {
-		itemNotificationRenderer.sprite = item.NotificationSprite;
-		itemNotificationAnimator.SetTrigger("show");
 	}
 
 	private void LateUpdate() {
