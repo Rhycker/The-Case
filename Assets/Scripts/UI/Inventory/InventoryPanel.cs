@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class InventoryPanel : MonoBehaviour {
 
+	private enum ScrollState {
+		Right = -1,
+		None,
+		Left = 1
+	}
+
 	public bool IsActive { get { return gameObject.activeInHierarchy; } }
 	public int MaxItemCount { get; private set; }
 
@@ -19,9 +25,9 @@ public class InventoryPanel : MonoBehaviour {
 
 	private UniqueWidgetItem selectedCombineItem;
 	private bool isCombining { get { return selectedCombineItem != null; } }
-
-	private bool selectLeftDown;
-	private bool selectRightDown;
+	
+	private ScrollState startScrollState;
+	private ScrollState currentScrollState;
 	private float selectionTime;
 
 	public void Toggle() {
@@ -32,6 +38,7 @@ public class InventoryPanel : MonoBehaviour {
 		}
 		else {
 			gameObject.SetActive(true);
+			startScrollState = GetCurrentScrollState();
 		}
 	}
 
@@ -123,16 +130,27 @@ public class InventoryPanel : MonoBehaviour {
 			InteractItemWidget(topItemWidget);
 		}
 
-		float horizontalInput = GameInput.Instance.Service.InventoryHorizontal();
-		if (horizontalInput < -0.3f) {
-			UpdateSelection(false);
+		ScrollState newScrollState = GetCurrentScrollState();
+		if(startScrollState != ScrollState.None && startScrollState == newScrollState) {
+			return;
 		}
-		else if(horizontalInput > 0.3f) {
-			UpdateSelection(true);
+		else {
+			startScrollState = ScrollState.None;
 		}
-		else if(horizontalInput == 0f) {
-			selectLeftDown = false;
-			selectRightDown = false;
+
+		if(newScrollState == ScrollState.None) {
+			currentScrollState = ScrollState.None;
+			return;
+		}
+
+		if(newScrollState != currentScrollState) {
+			SelectItemWidget((int)newScrollState);
+			currentScrollState = newScrollState;
+			return;
+		}
+
+		if ((Time.time - selectionTime) > minSelectionSwitchTime) {
+			SelectItemWidget((int)newScrollState);
 		}
 	}
 
@@ -140,28 +158,6 @@ public class InventoryPanel : MonoBehaviour {
 		selectedCombineItem = item;
 		selectionIndicatorContainer.SetActive(!isCombining && itemCount > 0);
 		combineIndicatorContainer.SetActive(isCombining);
-	}
-
-	private void UpdateSelection(bool isRight) {
-		if (isRight) {
-			if (!selectRightDown) {
-				selectLeftDown = false;
-				selectRightDown = true;
-				SelectItemWidget(-1);
-			}
-		}
-		else {
-			if (!selectLeftDown) {
-				selectRightDown = false;
-				selectLeftDown = true;
-				SelectItemWidget(1);
-			}
-		}
-
-		if((Time.time - selectionTime) > minSelectionSwitchTime) {
-			int indexShift = isRight ? 1 : -1;
-			SelectItemWidget(indexShift);
-		}
 	}
 
 	private void SelectItemWidget(int indexShift) {
@@ -212,6 +208,17 @@ public class InventoryPanel : MonoBehaviour {
 			int lastItemIndex = itemCount - 1;
 			itemWidgets[2].BindItem(sortedItems[lastItemIndex]);
 		}
+	}
+
+	private ScrollState GetCurrentScrollState() {
+		float horizontal = GameInput.Instance.Service.InventoryHorizontal();
+		if (horizontal < -0.3f) {
+			return ScrollState.Left;
+		}
+		else if (horizontal > 0.3f) {
+			return ScrollState.Right;
+		}
+		return ScrollState.None;
 	}
 
 }

@@ -3000,7 +3000,7 @@ MonoBehaviour:
   interactionPopup: {fileID: 1219900795}
   selectionIndicatorContainer: {fileID: 886825127}
   combineIndicatorContainer: {fileID: 1798115115}
-  minSelectionSwitchTime: 0.5
+  minSelectionSwitchTime: 0.3
 --- !u!1 &831104831
 GameObject:
   m_ObjectHideFlags: 0
