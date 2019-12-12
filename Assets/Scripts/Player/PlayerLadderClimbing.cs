@@ -129,7 +129,6 @@ public class PlayerLadderClimbing : MonoBehaviour {
 
 	private void StopClimbingLadder(Vector2 endPosition) {
 		Action stopClimbing = () => {
-			Debug.Log("Stop climbing");
 			rigidbody.MovePosition(endPosition);
 			climbingState = ClimbingState.None;
 			rigidbody.isKinematic = false;

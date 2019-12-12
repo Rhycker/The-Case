@@ -17,3 +17,4 @@ MonoBehaviour:
   examinationText: Might be useful for breaking stones
   firstIngredient: {fileID: 0}
   secondIngredient: {fileID: 0}
+  notificationSprite: {fileID: 21300000, guid: 57d93cff3e5c1af48a9e48736b839446, type: 3}

@@ -11,12 +11,14 @@ public class Item : ScriptableObject {
 	public ItemUseType ItemUse { get { return itemUse; } }
 	public Sprite Icon { get { return icon; } }
 	public string ExaminationText { get { return examinationText; } }
+	public Sprite NotificationSprite { get { return notificationSprite; } }
 
 	[SerializeField] private Sprite icon;
 	[SerializeField] private ItemUseType itemUse;
 	[SerializeField] private string examinationText;
 	[SerializeField] private Item firstIngredient;
 	[SerializeField] private Item secondIngredient;
+	[SerializeField] private Sprite notificationSprite;
 
 	private static Item[] allItems;
 

@@ -17,3 +17,4 @@ MonoBehaviour:
   examinationText: I might be able to make fire with this
   firstIngredient: {fileID: 0}
   secondIngredient: {fileID: 0}
+  notificationSprite: {fileID: 21300000, guid: 7be9733520deb2b498018925cc3ea852, type: 3}

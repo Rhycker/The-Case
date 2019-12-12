@@ -17,3 +17,4 @@ MonoBehaviour:
   examinationText: Useful for construction
   firstIngredient: {fileID: 0}
   secondIngredient: {fileID: 0}
+  notificationSprite: {fileID: 21300000, guid: 849e47da54814904392245de2de3e678, type: 3}

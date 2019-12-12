@@ -18,7 +18,6 @@ public class SoundManager : MonoBehaviour {
 
 	public void PlaySound(AudioClip audioClip, float volumeScale = 1f) {
 		source.PlayOneShot(audioClip, volumeScale);
-		Debug.Log("Play shot");
 	}
 
 	private void Awake() {
