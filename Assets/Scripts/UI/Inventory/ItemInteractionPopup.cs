@@ -41,9 +41,7 @@ public class ItemInteractionPopup : MonoBehaviour {
 	}
 
 	public void Button_Use() {
-		Debug.Log("Use " + item.name);
-		inventoryPanel.Toggle();
-		interactionScript.UseItem(item);
+		UseItem();
 	}
 
 	public void Button_Wear() {
@@ -56,6 +54,18 @@ public class ItemInteractionPopup : MonoBehaviour {
 
 	public void Button_Examine() {
 		Debug.Log("Examine: " + item.ExaminationText);
+	}
+
+	private void Update() {
+		if (GameInput.Instance.Service.InteractButtonDown()) {
+			UseItem();
+		}
+	}
+
+	private void UseItem() {
+		Debug.Log("Use " + item.name);
+		inventoryPanel.Toggle();
+		interactionScript.UseItem(item);
 	}
 
 }
