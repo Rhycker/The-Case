@@ -32,6 +32,7 @@ public class PlayerMovement : MonoBehaviour {
 		float horizontalInput = GameInput.Instance.Service.Horizontal();
 		if ((hitPointIsRight && horizontalInput > 0f) || (!hitPointIsRight && horizontalInput < 0f)) {
 			animator.SetBool("leanOver", true);
+			isLeaningOver = true;
 			CoroutineHelper.WaitOneFrame(() => {
 				animator.SetBool("leanOver", false);
 			});
