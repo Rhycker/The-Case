@@ -18,6 +18,7 @@ public class WoodCutter : InteractableObject {
 			CanInteract = false;
 			Inventory.Instance.AddItem(rewardItem);
 			rewardItem = null;
+			ShowInteractIcon(false);
 		}
 		else if(!fire.IsLit) {
 			fireRequestIcon.SetActive(true);
