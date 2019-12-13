@@ -10,7 +10,7 @@
 	}
 	
 	public void Button_Continue() {
-
+		StoryScreen.Instance.Activate();
 	}
 
 }
