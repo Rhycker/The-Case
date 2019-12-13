@@ -13,6 +13,7 @@ public class WoodCutter : InteractableObject {
 	private Animator animator;
 
 	public override void Interact() {
+        //Raf added sound
 		SoundManager.Instance.PlaySound(interactionSound);
 		if (fire.IsLit && rewardItem != null) {
 			CanInteract = false;

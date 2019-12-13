@@ -2,7 +2,8 @@
 
 public class PlayerMovement : MonoBehaviour {
 
-	[SerializeField] private float movementForce;
+    [SerializeField] private AudioClip FallingSound;
+    [SerializeField] private float movementForce;
 	[SerializeField] private Animator animator;
 	[SerializeField] private AnimationClip leanOverAnimation;
 
@@ -31,7 +32,9 @@ public class PlayerMovement : MonoBehaviour {
 		bool hitPointIsRight = collision.contacts[0].point.x > transform.position.x;
 		float horizontalInput = GameInput.Instance.Service.Horizontal();
 		if ((hitPointIsRight && horizontalInput > 0f) || (!hitPointIsRight && horizontalInput < 0f)) {
-			animator.SetBool("leanOver", true);
+            //Falling sound
+            SoundManager.Instance.PlaySound(FallingSound);
+            animator.SetBool("leanOver", true);
 			isLeaningOver = true;
 			CoroutineHelper.WaitOneFrame(() => {
 				animator.SetBool("leanOver", false);
